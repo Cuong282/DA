@@ -1,0 +1,24 @@
+/* .highcharts-root {
+    height: 140px;
+    width: 200px;
+} */
+
+.highcharts-container {
+  height: 130px !important;
+}
+
+.scrollbar-thumb-scroll {
+  --scrollbar-thumb: hsl(0deg 57.73% 42.43% / 50.2%) !important;
+}
+
+.bg-theme-secondary highcharts {
+  background-color: aquamarine;
+}
+
+.highcharts-credits {
+  color: red;
+}
+
+.highcharts-axis highcharts-yaxis text {
+  color: blue;
+}

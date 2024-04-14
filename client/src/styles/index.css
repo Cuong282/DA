@@ -1,0 +1,447 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#root {
+  width: 100vw;
+  height: 100vh;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 9999px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--color-theme-scroll);
+}
+
+*::-webkit-scrollbar-track {
+  background-color: var(--color-theme-primary);
+}
+
+.theme-dark {
+  color-scheme: dark !important;
+  --color-theme-primary: var(--color-classic-primary);
+  --color-theme-secondary: var(--color-classic-secondary);
+  --color-theme-tertiary: var(--color-classic-tertiary);
+  --color-theme-explain: var(--color-classic-explain);
+  --color-theme-invert: var(--color-classic-invert);
+  --color-theme-highlight: var(--color-classic-highlight);
+  --color-theme-disabled: var(--color-classic-disabled);
+  --color-theme-neutral: var(--color-classic-neutral);
+  --color-theme-overlay: var(--color-classic-overlay);
+  --color-theme-scroll: var(--color-classic-scroll);
+  --color-theme-crimson: var(--color-classic-crimson);
+  --color-theme-buy: var(--color-classic-buy);
+  --color-theme-sell: var(--color-classic-sell);
+  --color-theme-ref: var(--color-classic-ref);
+  --color-theme-switch: var(--color-classic-switch);
+  --color-theme-buy-highlight: var(--color-classic-buy-highlight);
+  --color-theme-sell-highlight: var(--color-classic-sell-highlight);
+  --color-theme-ref-highlight: var(--color-classic-ref-highlight);
+  --color-theme-text-primary: var(--color-classic-text-primary);
+  --color-theme-text-secondary: var(--color-classic-text-secondary);
+  --color-theme-text-tertiary: var(--color-classic-text-tertiary);
+  --color-theme-text-explain: var(--color-classic-text-explain);
+  --color-theme-text-invert: var(--color-classic-text-invert);
+  --color-theme-text-highlight: var(--color-classic-text-highlight);
+  --color-theme-text-up: var(--color-classic-text-up);
+  --color-theme-text-down: var(--color-classic-text-down);
+  --color-theme-text-ceil: var(--color-classic-text-ceil);
+  --color-theme-text-floor: var(--color-classic-text-floor);
+  --color-theme-text-ref: var(--color-classic-text-ref);
+  --color-theme-text-stable: var(--color-classic-text-stable);
+  --color-theme-text-pending: var(--color-classic-text-pending);
+  --color-theme-text-success: var(--color-classic-text-success);
+  --color-theme-text-fail: var(--color-classic-text-fail);
+  --color-theme-text-cancel: var(--color-classic-text-cancel);
+  --color-theme-text-disabled: var(--color-classic-text-disabled);
+  --color-theme-flash-up: var(--color-classic-flash-up);
+  --color-theme-flash-down: var(--color-classic-flash-down);
+  --color-theme-flash-ceil: var(--color-classic-flash-ceil);
+  --color-theme-flash-floor: var(--color-classic-flash-floor);
+  --color-theme-flash-ref: var(--color-classic-flash-ref);
+  --color-theme-flash-stable: var(--color-classic-flash-stable);
+  --color-theme-price-board-menu: var(--color-classic-price-board-menu);
+  --color-theme-price-table-header: var(--color-classic-price-table-header);
+  --color-theme-price-table-border: var(--color-classic-price-table-border);
+  --color-theme-price-table-col-highlight: var(
+    --color-classic-price-table-col-highlight
+  );
+  --color-theme-price-table-row-odd: var(--color-classic-price-table-row-odd);
+  --color-theme-price-table-row-even: var(--color-classic-price-table-row-even);
+  --color-theme-table-header: var(--color-classic-table-header);
+  --color-theme-table-row-odd: var(--color-classic-table-row-odd);
+  --color-theme-table-row-even: var(--color-classic-table-row-even);
+  --color-theme-table-border: var(--color-classic-table-border);
+  --color-theme-input-border: var(--color-classic-input-border);
+  --color-theme-input-background: var(--color-classic-input-background);
+  --color-theme-input-disabled: var(--color-classic-input-disabled);
+  --color-theme-tooltip-text-color: var(--color-classic-tooltip-text-color);
+  --color-theme-tooltip-background: var(--color-classic-tooltip-background);
+  --color-theme-dropdown-background: var(--color-classic-dropdown-background);
+  --color-theme-dropdown-active: var(--color-classic-dropdown-active);
+  --color-theme-panel-background: var(--color-classic-panel-background);
+  --color-theme-toast-background-default: var(
+    --color-classic-toast-background-default
+  );
+  --color-theme-toast-background-info: var(
+    --color-classic-toast-background-info
+  );
+  --color-theme-toast-background-success: var(
+    --color-classic-toast-background-success
+  );
+  --color-theme-toast-background-warning: var(
+    --color-classic-toast-background-warning
+  );
+  --color-theme-toast-background-error: var(
+    --color-classic-toast-background-error
+  );
+}
+
+.theme-light {
+  color-scheme: normal !important;
+  --color-theme-primary: var(--color-light-primary);
+  --color-theme-secondary: var(--color-light-secondary);
+  --color-theme-tertiary: var(--color-light-tertiary);
+  --color-theme-explain: var(--color-light-explain);
+  --color-theme-invert: var(--color-light-invert);
+  --color-theme-highlight: var(--color-light-highlight);
+  --color-theme-disabled: var(--color-light-disabled);
+  --color-theme-neutral: var(--color-light-neutral);
+  --color-theme-overlay: var(--color-light-overlay);
+  --color-theme-scroll: var(--color-light-scroll);
+  --color-theme-crimson: var(--color-light-crimson);
+  --color-theme-buy: var(--color-light-buy);
+  --color-theme-sell: var(--color-light-sell);
+  --color-theme-ref: var(--color-light-ref);
+  --color-theme-switch: var(--color-light-switch);
+  --color-theme-buy-highlight: var(--color-light-buy-highlight);
+  --color-theme-sell-highlight: var(--color-light-sell-highlight);
+  --color-theme-ref-highlight: var(--color-light-ref-highlight);
+  --color-theme-text-primary: var(--color-light-text-primary);
+  --color-theme-text-secondary: var(--color-light-text-secondary);
+  --color-theme-text-tertiary: var(--color-light-text-tertiary);
+  --color-theme-text-explain: var(--color-light-text-explain);
+  --color-theme-text-invert: var(--color-light-text-invert);
+  --color-theme-text-highlight: var(--color-light-text-highlight);
+  --color-theme-text-up: var(--color-light-text-up);
+  --color-theme-text-down: var(--color-light-text-down);
+  --color-theme-text-ceil: var(--color-light-text-ceil);
+  --color-theme-text-floor: var(--color-light-text-floor);
+  --color-theme-text-ref: var(--color-light-text-ref);
+  --color-theme-text-stable: var(--color-light-text-stable);
+  --color-theme-text-pending: var(--color-light-text-pending);
+  --color-theme-text-success: var(--color-light-text-success);
+  --color-theme-text-fail: var(--color-light-text-fail);
+  --color-theme-text-cancel: var(--color-light-text-cancel);
+  --color-theme-text-disabled: var(--color-light-text-disabled);
+  --color-theme-flash-up: var(--color-light-flash-up);
+  --color-theme-flash-down: var(--color-light-flash-down);
+  --color-theme-flash-ceil: var(--color-light-flash-ceil);
+  --color-theme-flash-floor: var(--color-light-flash-floor);
+  --color-theme-flash-ref: var(--color-light-flash-ref);
+  --color-theme-flash-stable: var(--color-light-flash-stable);
+  --color-theme-price-board-menu: var(--color-light-price-board-menu);
+  --color-theme-price-table-header: var(--color-light-price-table-header);
+  --color-theme-price-table-border: var(--color-light-price-table-border);
+  --color-theme-price-table-col-highlight: var(
+    --color-light-price-table-col-highlight
+  );
+  --color-theme-price-table-row-odd: var(--color-light-price-table-row-odd);
+  --color-theme-price-table-row-even: var(--color-light-price-table-row-even);
+  --color-theme-table-header: var(--color-light-table-header);
+  --color-theme-table-row-odd: var(--color-light-table-row-odd);
+  --color-theme-table-row-even: var(--color-light-table-row-even);
+  --color-theme-table-border: var(--color-light-table-border);
+  --color-theme-input-border: var(--color-light-input-border);
+  --color-theme-input-background: var(--color-light-input-background);
+  --color-theme-input-disabled: var(--color-light-input-disabled);
+  --color-theme-tooltip-text-color: var(--color-light-tooltip-text-color);
+  --color-theme-tooltip-background: var(--color-light-tooltip-background);
+  --color-theme-dropdown-background: var(--color-light-dropdown-background);
+  --color-theme-dropdown-active: var(--color-light-dropdown-active);
+  --color-theme-panel-background: var(--color-light-panel-background);
+  --color-theme-toast-background-default: var(
+    --color-light-toast-background-default
+  );
+  --color-theme-toast-background-info: var(--color-light-toast-background-info);
+  --color-theme-toast-background-success: var(
+    --color-light-toast-background-success
+  );
+  --color-theme-toast-background-warning: var(
+    --color-light-toast-background-warning
+  );
+  --color-theme-toast-background-error: var(
+    --color-light-toast-background-error
+  );
+}
+
+.theme-oled {
+  color-scheme: dark !important;
+  --color-theme-primary: var(--color-oled-primary);
+  --color-theme-secondary: var(--color-oled-secondary);
+  --color-theme-tertiary: var(--color-oled-tertiary);
+  --color-theme-explain: var(--color-oled-explain);
+  --color-theme-invert: var(--color-oled-invert);
+  --color-theme-highlight: var(--color-oled-highlight);
+  --color-theme-disabled: var(--color-oled-disabled);
+  --color-theme-neutral: var(--color-oled-neutral);
+  --color-theme-overlay: var(--color-oled-overlay);
+  --color-theme-scroll: var(--color-oled-scroll);
+  --color-theme-crimson: var(--color-oled-crimson);
+  --color-theme-buy: var(--color-oled-buy);
+  --color-theme-sell: var(--color-oled-sell);
+  --color-theme-ref: var(--color-oled-ref);
+  --color-theme-switch: var(--color-oled-switch);
+  --color-theme-buy-highlight: var(--color-oled-buy-highlight);
+  --color-theme-sell-highlight: var(--color-oled-sell-highlight);
+  --color-theme-ref-highlight: var(--color-oled-ref-highlight);
+  --color-theme-text-primary: var(--color-oled-text-primary);
+  --color-theme-text-secondary: var(--color-oled-text-secondary);
+  --color-theme-text-tertiary: var(--color-oled-text-tertiary);
+  --color-theme-text-explain: var(--color-oled-text-explain);
+  --color-theme-text-invert: var(--color-oled-text-invert);
+  --color-theme-text-highlight: var(--color-oled-text-highlight);
+  --color-theme-text-up: var(--color-oled-text-up);
+  --color-theme-text-down: var(--color-oled-text-down);
+  --color-theme-text-ceil: var(--color-oled-text-ceil);
+  --color-theme-text-floor: var(--color-oled-text-floor);
+  --color-theme-text-ref: var(--color-oled-text-ref);
+  --color-theme-text-stable: var(--color-oled-text-stable);
+  --color-theme-text-pending: var(--color-oled-text-pending);
+  --color-theme-text-success: var(--color-oled-text-success);
+  --color-theme-text-fail: var(--color-oled-text-fail);
+  --color-theme-text-cancel: var(--color-oled-text-cancel);
+  --color-theme-text-disabled: var(--color-oled-text-disabled);
+  --color-theme-flash-up: var(--color-oled-flash-up);
+  --color-theme-flash-down: var(--color-oled-flash-down);
+  --color-theme-flash-ceil: var(--color-oled-flash-ceil);
+  --color-theme-flash-floor: var(--color-oled-flash-floor);
+  --color-theme-flash-ref: var(--color-oled-flash-ref);
+  --color-theme-flash-stable: var(--color-oled-flash-stable);
+  --color-theme-price-board-menu: var(--color-oled-price-board-menu);
+  --color-theme-price-table-header: var(--color-oled-price-table-header);
+  --color-theme-price-table-border: var(--color-oled-price-table-border);
+  --color-theme-price-table-col-highlight: var(
+    --color-oled-price-table-col-highlight
+  );
+  --color-theme-price-table-row-odd: var(--color-oled-price-table-row-odd);
+  --color-theme-price-table-row-even: var(--color-oled-price-table-row-even);
+  --color-theme-table-header: var(--color-oled-table-header);
+  --color-theme-table-row-odd: var(--color-oled-table-row-odd);
+  --color-theme-table-row-even: var(--color-oled-table-row-even);
+  --color-theme-table-border: var(--color-oled-table-border);
+  --color-theme-input-border: var(--color-oled-input-border);
+  --color-theme-input-background: var(--color-oled-input-background);
+  --color-theme-input-disabled: var(--color-oled-input-disabled);
+  --color-theme-tooltip-text-color: var(--color-oled-tooltip-text-color);
+  --color-theme-tooltip-background: var(--color-oled-tooltip-background);
+  --color-theme-dropdown-background: var(--color-oled-dropdown-background);
+  --color-theme-dropdown-active: var(--color-oled-dropdown-active);
+  --color-theme-panel-background: var(--color-oled-panel-background);
+  --color-theme-toast-background-default: var(
+    --color-oled-toast-background-default
+  );
+  --color-theme-toast-background-info: var(--color-oled-toast-background-info);
+  --color-theme-toast-background-success: var(
+    --color-oled-toast-background-success
+  );
+  --color-theme-toast-background-warning: var(
+    --color-oled-toast-background-warning
+  );
+  --color-theme-toast-background-error: var(
+    --color-oled-toast-background-error
+  );
+}
+
+:root {
+  --color-light-primary: #ededed;
+  --color-light-secondary: #fff;
+  --color-light-tertiary: #f4f4f4;
+  --color-light-explain: #f4f4f4;
+  --color-light-invert: #e5e5e5;
+  --color-light-highlight: #f4f4f4;
+  --color-light-disabled: #ececee;
+  --color-light-neutral: #f5f6f7;
+  --color-light-overlay: rgba(0, 0, 0, 0.5803921568627451);
+  --color-light-scroll: hsla(0, 0%, 66.7%, 0.5019607843137255);
+  --color-light-crimson: #d32f2f;
+  --color-light-buy: #1aa67c;
+  --color-light-sell: #c9111f;
+  --color-light-ref: #fdff12;
+  --color-light-switch: #c7c7c7;
+  --color-light-text-primary: #1e2329;
+  --color-light-text-secondary: #8f8f8f;
+  --color-light-text-tertiary: #1e2329;
+  --color-light-text-explain: #c1c1c1;
+  --color-light-text-invert: #fff;
+  --color-light-text-highlight: #d32f2f;
+  --color-light-text-up: #078c54;
+  --color-light-text-down: #ff0017;
+  --color-light-text-ceil: #be00be;
+  --color-light-text-floor: #088db7;
+  --color-light-text-ref: #e78b03;
+  --color-light-text-stable: #1e2329;
+  --color-light-text-pending: #d69000;
+  --color-light-text-success: #2e8e43;
+  --color-light-text-fail: #d32f2f;
+  --color-light-text-cancel: #8f8f8f;
+  --color-light-text-disabled: #c1c1c1;
+  --color-light-flash-up: #01a77a;
+  --color-light-flash-down: #c0002e;
+  --color-light-flash-ceil: #fd02fd;
+  --color-light-flash-floor: #0030cc;
+  --color-light-flash-ref: #d69000;
+  --color-light-flash-stable: #afafaf;
+  --color-light-price-board-menu: #fff;
+  --color-light-price-table-header: #f4f4f4;
+  --color-light-price-table-border: #cacccd;
+  --color-light-price-table-col-highlight: #e5e5e5;
+  --color-light-price-table-row-odd: #fff;
+  --color-light-price-table-row-even: #f4f4f4;
+  --color-light-table-header: #fafafa;
+  --color-light-table-row-odd: #fff;
+  --color-light-table-row-even: #f4f4f4;
+  --color-light-table-border: #dfe1e6;
+  --color-light-input-border: #dfe1e6;
+  --color-light-input-background: #fafbfc;
+  --color-light-input-disabled: #e3e3e3;
+  --color-light-tooltip-text-color: #1e2329;
+  --color-light-tooltip-background: #e2e2e2;
+  --color-light-dropdown-background: #fff;
+  --color-light-dropdown-active: #f4f4f4;
+  --color-light-panel-background: #fff;
+  --color-light-toast-background-default: #f4f4f4;
+  --color-light-toast-background-info: #009bde;
+  --color-light-toast-background-success: #3fa885;
+  --color-light-toast-background-warning: #f49f3b;
+  --color-light-toast-background-error: #d32f2f;
+  --color-classic-primary: #020210;
+  --color-classic-secondary: #1c1a29;
+  --color-classic-tertiary: #282637;
+  --color-classic-explain: #292737;
+  --color-classic-invert: #3d3950;
+  --color-classic-highlight: #6c697b;
+  --color-classic-disabled: #363645;
+  --color-classic-neutral: #363645;
+  --color-classic-overlay: rgba(0, 0, 0, 0.5803921568627451);
+  --color-classic-scroll: hsla(0, 0%, 66.7%, 0.5019607843137255);
+  --color-classic-crimson: #d32f2f;
+  --color-classic-buy: #1aa67c;
+  --color-classic-sell: #c9111f;
+  --color-classic-ref: #141413;
+  --color-classic-switch: #020210;
+  --color-classic-text-primary: #c1c1c1;
+  --color-classic-text-secondary: #eaecef;
+  --color-classic-text-tertiary: #fff;
+  --color-classic-text-explain: #dfe1e3;
+  --color-classic-text-invert: #fff;
+  --color-classic-text-highlight: #fff;
+  --color-classic-text-up: #0bdf39;
+  --color-classic-text-down: #ff0017;
+  --color-classic-text-ceil: #f23aff;
+  --color-classic-text-floor: #00c9ff;
+  --color-classic-text-ref: #fdff12;
+  --color-classic-text-stable: #dfe1e3;
+  --color-classic-text-pending: #d69000;
+  --color-classic-text-success: #0bdf39;
+  --color-classic-text-fail: #ff0d0d;
+  --color-classic-text-cancel: #969696;
+  --color-classic-text-disabled: #737373;
+  --color-classic-flash-up: #01a77a;
+  --color-classic-flash-down: #c0002e;
+  --color-classic-flash-ceil: #fd02fd;
+  --color-classic-flash-floor: #0030cc;
+  --color-classic-flash-ref: #d69000;
+  --color-classic-flash-stable: #565759;
+  --color-classic-price-board-menu: #292737;
+  --color-classic-price-table-header: #1c1a29;
+  --color-classic-price-table-border: #353641;
+  --color-classic-price-table-col-highlight: #2a263c;
+  --color-classic-price-table-row-odd: #05040e;
+  --color-classic-price-table-row-even: #171225;
+  --color-classic-table-header: #383644;
+  --color-classic-table-row-odd: #282637;
+  --color-classic-table-row-even: #1c1a29;
+  --color-classic-table-border: #3f4160;
+  --color-classic-input-border: #3f4160;
+  --color-classic-input-background: #1c1a29;
+  --color-classic-input-disabled: #45444f;
+  --color-classic-tooltip-text-color: #fff;
+  --color-classic-tooltip-background: #6c697b;
+  --color-classic-dropdown-background: #3d3950;
+  --color-classic-dropdown-active: #6c697b;
+  --color-classic-panel-background: #282637;
+  --color-classic-toast-background-default: #282637;
+  --color-classic-toast-background-info: #009bde;
+  --color-classic-toast-background-success: #3fa885;
+  --color-classic-toast-background-warning: #f49f3b;
+  --color-classic-toast-background-error: #d32f2f;
+  --color-oled-primary: #020210;
+  --color-oled-secondary: #282828;
+  --color-oled-tertiary: #303030;
+  --color-oled-explain: #3f3f3f;
+  --color-oled-invert: #646464;
+  --color-oled-highlight: #898989;
+  --color-oled-disabled: #404245;
+  --color-oled-neutral: #404245;
+  --color-oled-overlay: rgba(0, 0, 0, 0.5803921568627451);
+  --color-oled-scroll: hsla(0, 0%, 66.7%, 0.5019607843137255);
+  --color-oled-crimson: #d32f2f;
+  --color-oled-buy: #1aa67c;
+  --color-oled-sell: #c9111f;
+  --color-oled-ref: #fdff12;
+  --color-oled-switch: #020210;
+  --color-oled-text-primary: #c1c1c1;
+  --color-oled-text-secondary: #eaecef;
+  --color-oled-text-tertiary: #fff;
+  --color-oled-text-explain: #dfe1e3;
+  --color-oled-text-invert: #fff;
+  --color-oled-text-highlight: #fff;
+  --color-oled-text-up: #0bdf39;
+  --color-oled-text-down: #ff0d0d;
+  --color-oled-text-ceil: #fd02fd;
+  --color-oled-text-floor: #52d3f9;
+  --color-oled-text-ref: #fdff12;
+  --color-oled-text-stable: #d6d6d6;
+  --color-oled-text-pending: #d69000;
+  --color-oled-text-success: #0bdf39;
+  --color-oled-text-fail: #ff0d0d;
+  --color-oled-text-cancel: #969696;
+  --color-oled-text-disabled: #737373;
+  --color-oled-flash-up: #01a77a;
+  --color-oled-flash-down: #c0002e;
+  --color-oled-flash-ceil: #fd02fd;
+  --color-oled-flash-floor: #0030cc;
+  --color-oled-flash-ref: #d69000;
+  --color-oled-flash-stable: #565759;
+  --color-oled-price-board-menu: #3f3f3f;
+  --color-oled-price-table-header: #282828;
+  --color-oled-price-table-border: #3b3d41;
+  --color-oled-price-table-col-highlight: #303030;
+  --color-oled-price-table-row-odd: #05040e;
+  --color-oled-price-table-row-even: #05040e;
+  --color-oled-table-header: #434343;
+  --color-oled-table-row-odd: #282828;
+  --color-oled-table-row-even: #313131;
+  --color-oled-table-border: #3a3a3a;
+  --color-oled-input-border: #4d5259;
+  --color-oled-input-background: #282828;
+  --color-oled-input-disabled: #424242;
+  --color-oled-tooltip-text-color: #fff;
+  --color-oled-tooltip-background: #737373;
+  --color-oled-dropdown-background: #505050;
+  --color-oled-dropdown-active: #737373;
+  --color-oled-panel-background: #313131;
+  --color-oled-toast-background-default: #303030;
+  --color-oled-toast-background-info: #009bde;
+  --color-oled-toast-background-success: #3fa885;
+  --color-oled-toast-background-warning: #f49f3b;
+  --color-oled-toast-background-error: #d32f2f;
+}

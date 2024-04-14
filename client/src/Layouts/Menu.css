@@ -1,0 +1,57 @@
+.desk-top {
+  display: flex;
+
+  border-radius: 2px;
+}
+
+.dropdown button {
+  font-size: 12px;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+
+
+}
+
+.dropbtn {
+  /* padding: 16px; */
+  font-size: 12px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+
+  min-width: 103px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  margin: 4px 0 0 -4px;
+}
+
+.dropdown-content a {
+
+  padding: 8px 16px;
+  text-decoration: none;
+  display: block;
+
+}
+
+
+.dropdown:hover .dropdown-content {
+  display: block;
+
+}
+
+
+@media only screen {
+  div.nav w-full {
+    font-size: 80px;
+  }
+}

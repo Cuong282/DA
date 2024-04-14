@@ -1,0 +1,25 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cuong282/server-iboard.git"
+  },
+  "keywords": [
+    "iboard"
+  ],
+  "author": "-server",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Cuong282/server-iboard/issues"
+  },
+  "homepage": "https://github.com/Cuong282/server-iboard#readme",
+  "dependencies": {
+    "express": "^4.18.3"
+  }
+}

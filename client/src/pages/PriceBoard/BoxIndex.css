@@ -1,0 +1,134 @@
+/* custom boxindex */
+
+.main .ag-header-cell-comp-wrapper {
+    border: none !important;
+    margin-top: -22px !important;
+}
+
+.ag-theme-alpine .ag-row {
+    height: 27px !important;
+    background-color: var(--color-theme-table-row-odd);
+    width: 100%;
+    border: none;
+}
+
+.ag-center-cols-container {
+    height: 100% !important;
+}
+
+.main .ag-header {
+    min-height: 27px !important;
+    height: 31px !important;
+}
+
+.main .ag-ltr .ag-cell {
+    border: none !important;
+    width: 110px !important;
+}
+
+.main .ag-header-container {
+    border-bottom: 1px solid var(--color-theme-invert);
+}
+
+.ag-header-cell-text {
+    font-size: 12px;
+}
+
+.main .ag-root-wrapper.ag-layout-normal {
+    background-color: var(--color-theme-price-table-header) !important;
+    border-radius: 5px !important;
+    border: none !important;
+}
+
+.main .ag-row-odd {
+    background-color: var(--color-theme-price-table-header) !important;
+    height: 28px !important;
+}
+
+.main.ag-row-no-animation .ag-row {
+    height: 68px !important;
+}
+
+.main .ag-row:hover {
+    background-color: var(--color-theme-invert) !important;
+
+}
+
+.ag-row-even {
+    color: var(--color-theme-text-up) !important;
+}
+
+.main .ag-row-even:hover {
+    background-color: var(--color-theme-invert) !important;
+}
+
+.main .ag-header-row {
+    height: 50px !important;
+    width: 100% !important;
+    background-color: var(--color-theme-price-table-header) !important;
+    color: var(--color-theme-text-tertiary) !important;
+}
+
+.ag-body-horizontal-scroll-viewport {
+    overflow-x: clip !important;
+    border-radius: 10px !important;
+    color: var(--color-theme-text-up) !important;
+}
+
+.ag-body-horizontal-scroll {
+    background-color: rgba(0, 0, 0, 0, 5);
+}
+
+.ag-header {
+    background-color: var(--color-theme-price-table-header) !important;
+    border-bottom: 1px solid var(--color-theme-price-table-border) !important;
+}
+
+.highcharts-plot-background {
+    max-width: 900px !important;
+    min-width: 320px !important;
+    
+  }
+
+  .highcharts-figure,
+.highcharts-data-table table {
+    min-width: 360px;
+    max-width: 800px;
+    margin: 1em auto;
+}
+
+.highcharts-data-table table {
+    font-family: Verdana, sans-serif;
+    border-collapse: collapse;
+    border: 1px solid #ebebeb;
+    margin: 10px auto;
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+}
+
+.highcharts-data-table caption {
+    padding: 1em 0;
+    font-size: 1.2em;
+    color: #555;
+}
+
+.highcharts-data-table th {
+    font-weight: 600;
+    padding: 0.5em;
+}
+
+.highcharts-data-table td,
+.highcharts-data-table th,
+.highcharts-data-table caption {
+    padding: 0.5em;
+}
+
+.highcharts-data-table thead tr,
+.highcharts-data-table tr:nth-child(even) {
+    background: #f8f8f8;
+}
+
+.highcharts-data-table tr:hover {
+    background: #f1f7ff;
+}

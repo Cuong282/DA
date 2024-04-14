@@ -1,0 +1,38 @@
+.ant-popover-inner,
+.ant-popover-inner {
+  padding: 0px !important;
+}
+
+.ant-popover-arrow {
+  display: none !important;
+}
+
+.ant-popover-inner {
+  border-radius: 2px !important;
+  overflow: hidden !important;
+}
+
+/* css input */
+.ant-input.ant-input-sm {
+  background-color: var(--color-theme-secondary) !important;
+  color: var(--color-theme-text-tertiary) !important;
+  border-color: var(--color-theme-input-border) !important;
+}
+
+.ant-input-group-addon {
+  border-color: var(--color-theme-input-border) !important;
+}
+
+.ant-input.ant-input-sm::placeholder {
+  color: var(--color-theme-text-tertiary) !important;
+}
+
+.ant-input.ant-input-sm:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: var(--color-theme-text-tertiary) !important;
+}
+
+.ant-input.ant-input-sm::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: var(--color-theme-text-tertiary) !important;
+}
