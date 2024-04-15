@@ -4,7 +4,10 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
+
+	"github.com/gorilla/mux"
 )
 
 type Response struct {
@@ -55,8 +58,7 @@ type API struct {
 	CompanyNameEn int `json:"stockSycompanyNameEnmbol,omitempty"`
 }
 
-func main() {
-
+func DoList(w http.ResponseWriter, r *http.Request) {
 	url := "https://iboard-query.ssi.com.vn/stock/group/VNIndex"
 	method := "GET"
 
@@ -94,9 +96,11 @@ func main() {
 	}
 	// fmt.Println(string(body))
 	var Get1 Response
+
 	err = json.Unmarshal([]byte(body), &Get1)
 	fmt.Println(err)
 	fmt.Println(Get1.Data[4])
+	json.NewEncoder(w).Encode(Get1)
 	// var Get2 Response
 	// err = json.Unmarshal([]byte(body), &Get2)
 	// fmt.Println(err)
@@ -120,4 +124,12 @@ func main() {
 	// }`), &res)
 	// fmt.Println(err)
 	// fmt.Println(res.Data[0].ID)
+
+}
+
+func main() {
+	router := mux.NewRouter()
+	router.HandleFunc("/todo", DoList).Methods("GET")
+	log.Fatal(http.ListenAndServe(":3001", router))
+
 }

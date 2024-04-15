@@ -15,8 +15,20 @@ import {
   GridOptions,
   GridReadyEvent,
 } from "ag-grid-community";
+import WebSocket from 'ws';
 
 import { IOlympicData } from "../../interfaces/interfaces";
+
+
+const requestOptions = {
+  method: "GET",
+};
+
+fetch("http://localhost:3001/todo", requestOptions)
+  .then((response) => response.text())
+  .then((result) => console.log(result))
+  .catch((error) => console.error(error));
+
 
 const TableMain = () => {
   const getWidthFromPercent = (Percent: number, width: number): number => {
@@ -273,3 +285,7 @@ const TableMain = () => {
 };
 
 export default TableMain;
+
+function responseHandler(res: Response): any {
+  throw new Error("Function not implemented.");
+}
