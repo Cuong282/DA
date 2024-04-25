@@ -91,29 +91,30 @@ function BoxIndex() {
        <div className="col-span-5 xl:col-span-4 rounded bg-theme-secondary ">
           <div className="relative bg-theme-secondary  ">
             <table className="w-full text-sm text-left text-gray-500  ">
-              <thead className="text-theme-text-tertiary theme-text-highlight">
+              <thead className="text-theme-text-tertiary theme-text-highlight ">
                 <tr >
-
-                  <td className="px-0 py-0"> <SettingOutlined className="px-1 py-1" />Chỉ số</td>
-                  <td className="px-0 py-0">Điểm</td>
-                  <td className="px-0 py-0">{'<+/->'}</td>
-                  <td className="px-0 py-0">KLGD(triệu)</td>
-                  <td className="px-0 py-0">GTGD(tỷ)</td>
+                  <td className="px-2 py-0"> <SettingOutlined className="px-1 py-1 " />Chỉ số</td>
+                  <td className="px-2 py-0">Điểm</td>
+                  <td className="px-2 py-0">{'<+/->'}</td>
+                  <td className="px-2 py-0">KLGD(triệu)</td>
+                  <td className="px-2 py-0">GTGD(tỷ)</td>
                   <td className="px-2 py-0">CK tăng/giảm</td>
                 </tr>
               </thead>
               <tbody>
 
-                <tr className="  dark:border-gray-700  theme-text-highlight  ">
-                  <th scope="row" className="px-0 py-0 font-medium text-theme-text-tertiary">
+              <tr className="  theme-text-highlight mt-4 ">
+                  <th
+                    scope="row"
+                    className="px-1 py-1 font-medium text-theme-text-tertiary "
+                  >
                     VNINDEX
                   </th>
-                  <td className="px-0 py-2">Silver</td>
-                  <td className="px-0 py-0">Silver</td>
+                  <td className="px-4 py-2">Black</td>
+                  <td className="px-1 py-1">Accessories</td>
+                  <td className="px-1 py-1">$99</td>
+                  <td className="px-1 py-1">$99</td>
                   <td className="px-0 py-0">Laptop</td>
-                  <td className="px-0 py-0">Laptop</td>
-                  <td className="px-0 py-0">Laptop</td>
-
                 </tr>
                 <tr className="  dark:border-gray-700 theme-text-pending theme-sell-highlight bg-theme-price-table-col-highlight">
                   <th scope="row" className="px-1 py-1 font-medium text-theme-text-tertiary">
@@ -177,6 +178,7 @@ function BoxIndex() {
                   <td className="px-1 py-1">$99</td>
                   <td className="px-1 py-1">Laptop</td>
                 </tr>
+             
               </tbody>
             </table>
           </div>

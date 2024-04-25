@@ -1,8 +1,6 @@
-import React from "react";
 import BoxChart from "./BoxChart";
 import Menu from "./MenuPriceBoard";
 import TableMain from "./TableMain";
-import Buttom from "./buttom";
 
 const PriceBoard = () => {
   return (

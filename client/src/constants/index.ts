@@ -248,7 +248,7 @@ export const listMenus = [
         ],
     },
     {
-        name: "GIAO DIỆN CỦA TÔI",
+        name: "DANH MỤC CỦA TÔI",
         path: "/s-products",
     },
 ];

@@ -7,6 +7,10 @@
   height: 100vh;
 }
 
+p {
+  color: var(--color-theme-text-primary);
+}
+
 *::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -70,9 +74,7 @@
   --color-theme-price-board-menu: var(--color-classic-price-board-menu);
   --color-theme-price-table-header: var(--color-classic-price-table-header);
   --color-theme-price-table-border: var(--color-classic-price-table-border);
-  --color-theme-price-table-col-highlight: var(
-    --color-classic-price-table-col-highlight
-  );
+  --color-theme-price-table-col-highlight: var(--color-classic-price-table-col-highlight);
   --color-theme-price-table-row-odd: var(--color-classic-price-table-row-odd);
   --color-theme-price-table-row-even: var(--color-classic-price-table-row-even);
   --color-theme-table-header: var(--color-classic-table-header);
@@ -87,21 +89,11 @@
   --color-theme-dropdown-background: var(--color-classic-dropdown-background);
   --color-theme-dropdown-active: var(--color-classic-dropdown-active);
   --color-theme-panel-background: var(--color-classic-panel-background);
-  --color-theme-toast-background-default: var(
-    --color-classic-toast-background-default
-  );
-  --color-theme-toast-background-info: var(
-    --color-classic-toast-background-info
-  );
-  --color-theme-toast-background-success: var(
-    --color-classic-toast-background-success
-  );
-  --color-theme-toast-background-warning: var(
-    --color-classic-toast-background-warning
-  );
-  --color-theme-toast-background-error: var(
-    --color-classic-toast-background-error
-  );
+  --color-theme-toast-background-default: var(--color-classic-toast-background-default);
+  --color-theme-toast-background-info: var(--color-classic-toast-background-info);
+  --color-theme-toast-background-success: var(--color-classic-toast-background-success);
+  --color-theme-toast-background-warning: var(--color-classic-toast-background-warning);
+  --color-theme-toast-background-error: var(--color-classic-toast-background-error);
 }
 
 .theme-light {
@@ -150,9 +142,7 @@
   --color-theme-price-board-menu: var(--color-light-price-board-menu);
   --color-theme-price-table-header: var(--color-light-price-table-header);
   --color-theme-price-table-border: var(--color-light-price-table-border);
-  --color-theme-price-table-col-highlight: var(
-    --color-light-price-table-col-highlight
-  );
+  --color-theme-price-table-col-highlight: var(--color-light-price-table-col-highlight);
   --color-theme-price-table-row-odd: var(--color-light-price-table-row-odd);
   --color-theme-price-table-row-even: var(--color-light-price-table-row-even);
   --color-theme-table-header: var(--color-light-table-header);
@@ -167,19 +157,11 @@
   --color-theme-dropdown-background: var(--color-light-dropdown-background);
   --color-theme-dropdown-active: var(--color-light-dropdown-active);
   --color-theme-panel-background: var(--color-light-panel-background);
-  --color-theme-toast-background-default: var(
-    --color-light-toast-background-default
-  );
+  --color-theme-toast-background-default: var(--color-light-toast-background-default);
   --color-theme-toast-background-info: var(--color-light-toast-background-info);
-  --color-theme-toast-background-success: var(
-    --color-light-toast-background-success
-  );
-  --color-theme-toast-background-warning: var(
-    --color-light-toast-background-warning
-  );
-  --color-theme-toast-background-error: var(
-    --color-light-toast-background-error
-  );
+  --color-theme-toast-background-success: var(--color-light-toast-background-success);
+  --color-theme-toast-background-warning: var(--color-light-toast-background-warning);
+  --color-theme-toast-background-error: var(--color-light-toast-background-error);
 }
 
 .theme-oled {
@@ -228,9 +210,7 @@
   --color-theme-price-board-menu: var(--color-oled-price-board-menu);
   --color-theme-price-table-header: var(--color-oled-price-table-header);
   --color-theme-price-table-border: var(--color-oled-price-table-border);
-  --color-theme-price-table-col-highlight: var(
-    --color-oled-price-table-col-highlight
-  );
+  --color-theme-price-table-col-highlight: var(--color-oled-price-table-col-highlight);
   --color-theme-price-table-row-odd: var(--color-oled-price-table-row-odd);
   --color-theme-price-table-row-even: var(--color-oled-price-table-row-even);
   --color-theme-table-header: var(--color-oled-table-header);
@@ -245,19 +225,11 @@
   --color-theme-dropdown-background: var(--color-oled-dropdown-background);
   --color-theme-dropdown-active: var(--color-oled-dropdown-active);
   --color-theme-panel-background: var(--color-oled-panel-background);
-  --color-theme-toast-background-default: var(
-    --color-oled-toast-background-default
-  );
+  --color-theme-toast-background-default: var(--color-oled-toast-background-default);
   --color-theme-toast-background-info: var(--color-oled-toast-background-info);
-  --color-theme-toast-background-success: var(
-    --color-oled-toast-background-success
-  );
-  --color-theme-toast-background-warning: var(
-    --color-oled-toast-background-warning
-  );
-  --color-theme-toast-background-error: var(
-    --color-oled-toast-background-error
-  );
+  --color-theme-toast-background-success: var(--color-oled-toast-background-success);
+  --color-theme-toast-background-warning: var(--color-oled-toast-background-warning);
+  --color-theme-toast-background-error: var(--color-oled-toast-background-error);
 }
 
 :root {
@@ -444,4 +416,60 @@
   --color-oled-toast-background-success: #3fa885;
   --color-oled-toast-background-warning: #f49f3b;
   --color-oled-toast-background-error: #d32f2f;
+}
+
+
+
+.ag-cell.custom-athlete-cell {
+  padding-left: 10 !important;
+  padding-right: 0 !important;
+  height: 100%;
+}
+
+.ag-floating-top-container .pin {
+  color: red;
+}
+
+/* .my-custom-cell-renderer .pin {
+  color: red;
+} */
+
+.my-custom-cell-renderer {
+  display: flex;
+  font-size: 0.7rem;
+  color: white;
+  padding-top: 0.5rem;
+  margin-left: -5px;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  height: 100%;
+}
+
+
+
+.my-custom-cell-renderer>* {
+  line-height: normal;
+}
+
+.my-custom-cell-renderer i {
+  visibility: hidden;
+  cursor: move;
+
+}
+
+.my-custom-cell-renderer:hover i {
+  visibility: visible;
+}
+
+.my-custom-cell-renderer .athlete-info {
+  display: flex;
+  flex-direction: column;
+  width: 85px;
+  max-width: 85px;
+}
+
+.my-custom-cell-renderer .athlete-info>span {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

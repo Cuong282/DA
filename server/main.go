@@ -6,14 +6,23 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"strings"
+
+	"database/sql"
 
 	"github.com/gorilla/mux"
+	"github.com/jmoiron/sqlx"
+
+	_ "github.com/go-sql-driver/mysql"
 )
 
 type Response struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-	Data    []API  `json:"data"`
+	ID          int    `db:"id"`
+	Name        string `db:"name"`
+	Description string `db:"description"`
+	Code        string `json:"code"`
+	Message     string `json:"message"`
+	Data        []API  `json:"data"`
 }
 
 type API struct {
@@ -58,6 +67,33 @@ type API struct {
 	CompanyNameEn int `json:"stockSycompanyNameEnmbol,omitempty"`
 }
 
+type GetList struct {
+	IndexId        string  `json:"indexId,omitempty"`
+	IndexValue     float32 `json:"indexValue,omitempty"`
+	PrevIndexValue float32 `json:"PrevIndexValue,omitempty"`
+	Time           int     `json:"Time,omitempty"`
+	Change         float32 `json:"Change,omitempty"`
+	ChangePercent  float32 `json:"ChangePercent,omitempty"`
+	ChartOpen      float32 `json:"ChartOpen,omitempty"`
+	Advances       int     `json:"Advances,omitempty"`
+	AllQty         int     `json:"AllQty,omitempty"`
+	AllValue       int     `json:"AllValue,omitempty"`
+	Ceiling        int     `json:"Ceiling,omitempty"`
+	ChartHigh      float32 `json:"ChartHigh,omitempty"`
+	ChartLowf      float32 `json:"ChartLowf,omitempty"`
+	Declines       int     `json:"Declines,omitempty"`
+	Floor          int     `json:"Floor,omitempty"`
+	Nochanges      int     `json:"Nochanges,omitempty"`
+	TimeMaker      int     `json:"TimeMaker,omitempty"`
+	TotalQtty      int     `json:"TotalQtty,omitempty"`
+	TotalValue     int     `json:"TotalValue,omitempty"`
+	Label          string  `json:"Label,omitempty"`
+	ExchangeLabel  string  `json:"ExchangeLabel,omitempty"`
+}
+
+var Get1 Response
+var Get2 GetList
+
 func DoList(w http.ResponseWriter, r *http.Request) {
 	url := "https://iboard-query.ssi.com.vn/stock/group/VNIndex"
 	method := "GET"
@@ -95,41 +131,119 @@ func DoList(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	// fmt.Println(string(body))
-	var Get1 Response
 
+	err = json.Unmarshal([]byte(body), &Get2)
+	fmt.Println(err)
+	fmt.Println(Get2)
+	json.NewEncoder(w).Encode(Get2)
+
+}
+
+func GroupList(w http.ResponseWriter, r *http.Request) {
+	url := "https://iboard-query.ssi.com.vn/exchange-index/multiple"
+	method := "POST"
+
+	payload := strings.NewReader(`{"indexIds":["VNINDEX","VN30","HNX30","VNXALL","HNXIndex","HNXUpcomIndex"]}`)
+
+	client := &http.Client{}
+	req, err := http.NewRequest(method, url, payload)
+
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	req.Header.Add("authority", "iboard-query.ssi.com.vn")
+	req.Header.Add("accept", "application/json, text/plain, */*")
+	req.Header.Add("accept-language", "vi")
+	req.Header.Add("content-type", "application/json")
+	req.Header.Add("device-id", "033E6CF4-0EB1-4BA9-832E-E226CA3EF1D8")
+	req.Header.Add("origin", "https://iboard.ssi.com.vn")
+	req.Header.Add("referer", "https://iboard.ssi.com.vn/")
+	req.Header.Add("sec-ch-ua", "\"Google Chrome\";v=\"119\", \"Chromium\";v=\"119\", \"Not?A_Brand\";v=\"24\"")
+	req.Header.Add("sec-ch-ua-mobile", "?0")
+	req.Header.Add("sec-ch-ua-platform", "\"Windows\"")
+	req.Header.Add("sec-fetch-dest", "empty")
+	req.Header.Add("sec-fetch-mode", "cors")
+	req.Header.Add("sec-fetch-site", "same-site")
+	req.Header.Add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36")
+	req.Header.Add("Cookie", "__cf_bm=nmZwV37AVdzWd6riHESnpupAvZVpUIcXx0aeJr.gc5s-1713757927-1.0.1.1-Kvi6XjFnyPksmwu6UcrTZLIk3w9IuXxMqF77XWLu2LfhT.S3D.2fXKcnrSGWHiQ44CF0YLnwa0Pjq4Yuis7zsA; _cfuvid=STvJwsfbcBnL7XDk1aH97ZfPHOfYyl1q8cVHgbR0gmk-1713749532313-0.0.1.1-604800000")
+
+	res, err := client.Do(req)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	defer res.Body.Close()
+
+	body, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Println(string(body))
 	err = json.Unmarshal([]byte(body), &Get1)
 	fmt.Println(err)
 	fmt.Println(Get1.Data[4])
 	json.NewEncoder(w).Encode(Get1)
-	// var Get2 Response
-	// err = json.Unmarshal([]byte(body), &Get2)
-	// fmt.Println(err)
-	// fmt.Println(Get2.Message)
-
-	// var res Response
-	// err := json.Unmarshal([]byte(`
-	// {
-	// 	"code": "SUCCESS",
-	// 	"message": "Call API /stock/group/VNIndex successful",
-	// 	"data": [
-	// 		{
-	// 			"id": 1,
-	// 			"name": "manhnx"
-	// 		},
-	// 		{
-	// 			"id": 2,
-	// 			"name": "cuongnt"
-	// 		}
-	// 	]
-	// }`), &res)
-	// fmt.Println(err)
-	// fmt.Println(res.Data[0].ID)
 
 }
 
+type Controller struct {
+	x *sql.DB
+}
+
+func NewController(db *sql.DB) *Controller {
+	return &Controller{
+		x: db,
+	}
+}
+func (c *Controller) GetTodo(w http.ResponseWriter, r *http.Request) {
+	json.NewEncoder(w).Encode(Get1)
+	// var db *sql.DB
+	fmt.Println("111:", c.x)
+}
+func accessControlMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS,PUT")
+		w.Header().Set("Access-Control-Allow-Headers", "Origin, Content-Type")
+
+		if r.Method == "OPTIONS" {
+			return
+		}
+
+		next.ServeHTTP(w, r)
+	})
+}
+
 func main() {
+	db, err := sqlx.Connect("mysql", "root:123456@tcp(127.0.0.1:3306)/todo")
+	fmt.Printf("db: %v, err: %v\n", db, err)
+	if err != nil {
+		panic("Failed to connect to database")
+	}
+	defer db.Close()
+	rows, err := db.Queryx("SELECT id, name, description FROM todo")
+	if err != nil {
+		panic(err)
+	}
+	var values []Response
+	for rows.Next() {
+		v := Response{}
+		err := rows.StructScan(&v)
+		if err != nil {
+			panic(err)
+		}
+		fmt.Printf("v :%v\n", v)
+		values = append(values, v)
+	}
+
+	fmt.Printf("dodo: %v", values)
+
 	router := mux.NewRouter()
+	router.Use(accessControlMiddleware)
 	router.HandleFunc("/todo", DoList).Methods("GET")
+	router.HandleFunc("/GroupList", GroupList).Methods("POST")
 	log.Fatal(http.ListenAndServe(":3001", router))
 
 }

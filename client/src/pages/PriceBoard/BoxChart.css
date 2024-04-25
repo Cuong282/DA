@@ -3,9 +3,9 @@
     width: 200px;
 } */
 
-.highcharts-container {
+/* .highcharts-container {
   height: 130px !important;
-}
+} */
 
 .scrollbar-thumb-scroll {
   --scrollbar-thumb: hsl(0deg 57.73% 42.43% / 50.2%) !important;

@@ -118,11 +118,11 @@ const BoxChart = () => {
 
   return (
     <section className="w-100">
-      <div className=" p-1 bg-theme-primary grid grid-cols-12 gap-1 ">
-        <div className="w-100 col-span-7 xl:col-span-8 flex space-x-1 h-full overflow-x-auto rounded scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-scroll ">
+      <div className=" w-full p-1 bg-theme-primary grid grid-cols-12 gap-1 ">
+        <div className=" col-span-7 xl:col-span-8 flex space-x-1 h-full overflow-x-auto rounded scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-scroll ">
           <div className="flex-1 min-w-[200px] p-1 bg-theme-secondary rounded text-white">
-            <div className="w-30 p-3" style={{}}>
-              <div className="y bg-theme-primary">
+            <div className="w-30 p-3" >
+              <div className="bg-theme-primary"style={{height:"130px",width:"100%"}}>
                 <HighchartsReact
                   highcharts={Highcharts}
 
@@ -130,7 +130,7 @@ const BoxChart = () => {
                 />
               </div>
 
-              <div className="flex justify-between pt-3 ">
+              <div className="flex justify-between pt-7 ">
                 <button className="flex select-index-button max-w items-center hover:text-color-highlight">
                   <p className="text-theme-text-tertiary flex items-center text-xs">
                     VNINDEX
@@ -172,18 +172,18 @@ const BoxChart = () => {
           </div>
 
           <div className="flex-1 min-w-[200px] p-1 bg-theme-secondary rounded text-white">
-            <div className="w-30 p-3" style={{}}>
-              <div className="y bg-theme-primary">
+            <div className="w-30 p-3" >
+              <div className="y bg-theme-primary" style={{height:"130px",width:"100%"}}>
                 <HighchartsReact
                   highcharts={Highcharts}
                   options={chartOptions}
                 />
               </div>
 
-              <div className="flex justify-between pt-3 ">
+              <div className="flex justify-between pt-7 ">
                 <button className="flex select-index-button max-w items-center hover:text-color-highlight">
                   <p className="text-theme-text-tertiary flex items-center text-xs">
-                    VNINDEX
+                    VN30
                   </p>
                   <BiChevronDown />
                 </button>
@@ -221,18 +221,18 @@ const BoxChart = () => {
             </div>
           </div>
           <div className="flex-1 min-w-[200px] p-1 bg-theme-secondary rounded text-white">
-            <div className="w-30 p-3" style={{}}>
-              <div className="y bg-theme-primary">
+            <div className="w-30 p-3" >
+              <div className="y bg-theme-primary" style={{height:"130px",width:"100%"}}>
                 <HighchartsReact
                   highcharts={Highcharts}
                   options={chartOptions}
                 />
               </div>
 
-              <div className="flex justify-between pt-3 ">
+              <div className="flex justify-between pt-7 ">
                 <button className="flex select-index-button max-w items-center hover:text-color-highlight">
                   <p className="text-theme-text-tertiary flex items-center text-xs">
-                    VNINDEX
+                    HNX30
                   </p>
                   <BiChevronDown />
                 </button>
@@ -270,18 +270,18 @@ const BoxChart = () => {
             </div>
           </div>
           <div className="flex-1 min-w-[200px] p-1 bg-theme-secondary rounded text-white">
-            <div className="w-30 p-3" style={{}}>
-              <div className="y bg-theme-primary">
+            <div className="w-30 p-3" >
+              <div className="y bg-theme-primary" style={{height:"130px",width:"100%"}}>
                 <HighchartsReact
                   highcharts={Highcharts}
                   options={chartOptions}
                 />
               </div>
 
-              <div className="flex justify-between pt-3 ">
+              <div className="flex justify-between pt-7 ">
                 <button className="flex select-index-button max-w items-center hover:text-color-highlight">
                   <p className="text-theme-text-tertiary flex items-center text-xs">
-                    VNINDEX
+                    UPCOM
                   </p>
                   <BiChevronDown />
                 </button>

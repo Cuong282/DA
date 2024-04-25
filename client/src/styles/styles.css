@@ -1,0 +1,19 @@
+.active .active-down {
+  display: none;
+}
+
+.active ul {
+  display: grid;
+}
+.in-active ul {
+  display: none;
+}
+
+.in-active ul {
+  display: none;
+}
+
+.active .active-up {
+  display: block;
+}
+
