@@ -1,11 +1,13 @@
 
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
+import { useEffect } from "react";
 
 
 
 const News = () => {
 
+  
   const chartOptions = {
 
     navigation: {
@@ -59,7 +61,13 @@ const News = () => {
    
   };
 
+  async function getdata() {
 
+  }
+
+  useEffect(() => {
+    getdata();
+  }, []);
 
   return (
     <section className="w-full h-full">

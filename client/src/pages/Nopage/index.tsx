@@ -61,9 +61,6 @@ const Nopage = () => {
       </Header> */}
         <Content style={{ padding: "0 48px", height: "100%" }}>
           <Breadcrumb style={{ margin: "20px 0" }}>
-            {/* <Breadcrumb.Item>Home</Breadcrumb.Item>
-          <Breadcrumb.Item>List</Breadcrumb.Item>
-          <Breadcrumb.Item>App</Breadcrumb.Item> */}
           </Breadcrumb>
           <Layout
             style={{
@@ -88,7 +85,6 @@ const Nopage = () => {
           </Layout>
         </Content>
         <Footer style={{ textAlign: "center" }}>
-          {/* {new Date().getFullYear()}  */}
         </Footer>
       </Layout>
     </>

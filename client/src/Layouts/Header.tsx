@@ -117,7 +117,7 @@ const Header = () => {
                       </button>
                     </div>
                   </div>
-                  <div className="social-title"> đăng nhập tài khoản với</div>
+             
                   <div className="google_login">
 
                   </div>

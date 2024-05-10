@@ -1,69 +1,71 @@
-import React, { useEffect, useState } from "react";
-// import {
-//   getIndexData,
-//   getIndexData1,
-//   getIndexData2,
-//   getIndexData3,
-// } from "../../services/apis";
-import Highcharts from "highcharts/highstock";
+
 import HighchartsReact from "highcharts-react-official";
-import { configChartIndex } from "../../untils/bindDataHighcharts";
 import "./BoxIndex.css";
 
+const HightCharts = () => {
 
-const HightCharts = ({ index }: any) => {
-  const listCharts: any = [
-    // getIndexData,
-    // getIndexData1,
-    // getIndexData2,
-    // getIndexData3,
-  ];
+  const chartOptions = {
+    navigation: {
+      buttonOptions: {
+        enabled: false,
+      },
+    },
+    series: [
+      {
+        data: [1, 2, 3, 2, 4, 2, 3, 5,12,3,5,5,12,15,1,5,33 ,1,12,4,12,4,5,20,7,2,6,8,16,12],
+      },
+    ],
+    legend: {
+      floating: true,
+      x: 100,
+      y: 70,
+    },
+    title: {
+      align: "center",
+      text: "",
+      style: {
+        fontSize: "11px",
+        "font-weight": "bolder",
+      },
+    },
+    credits: {
+      enabled: false,
+    },
+    chart: {
+      type: "line",
+      height: 172,
+      backgroundColor: "transparent",
+      marginRight: 0,
+      marginTop: 0,
+      marginLeft: 0, 
+    },
+    subtitle: {
+      align: "center",
+      text: ``,
+      style: {
+        color: "#333333",
+        fontSize: "12px",
+      },
+    },
+    plotOptions: {
+      series: {
+        pointStart: 0,
+      },
+    },
+  };
 
-  const sevenHoursInMilliseconds = 3600 * 7 * 1000;
 
-  const [dataChart, setDataChart] = useState<any>({});
-
-  async function getdataChart() {
-    const result: any = await listCharts[index]();
-    const volume: any = [];
-    const value: any = [];
-    const time: any = [];
-
-    result.data.data.history.forEach((e: any) => {
-
-      volume.push([
-        Number(e.time) * 1000 + sevenHoursInMilliseconds,
-        Number(e.vol),
-      ]);
-      value.push([
-        Number(e.time) * 1000 + sevenHoursInMilliseconds,
-        Number(e.indexValue),
-      ]);
-    });
-
-    const dataUpdate = {
-      volume: volume,
-      value: value,
-      prevIndexValue: result.data.data.prevIndexValue,
-      time: time
-    };
-    setDataChart(dataUpdate);
-  }
-  useEffect(() => {
-    getdataChart();
-  }, []);
 
   return (
     <>
       <div className="highcharts-background relative" style={{ height: 105 }}>
         <div className="absolute left-0 top-0 w-full h-[85px] bg-theme-primary"></div>
         <div>
-          {dataChart.value && dataChart.volume && dataChart.prevIndexValue && (
+        {
             <HighchartsReact
-              highcharts={Highcharts}
-              options={configChartIndex(dataChart.value, dataChart.volume, dataChart.prevIndexValue)}
+            options={chartOptions}
             />
-          )}
+             }
         </div>
       </div>
     </>

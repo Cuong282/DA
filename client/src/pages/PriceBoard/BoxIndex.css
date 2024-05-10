@@ -2,7 +2,10 @@
 
 .main .ag-header-cell-comp-wrapper {
     border: none !important;
-    margin-top: -22px !important;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   height: 57px !important;
 }
 
 .ag-theme-alpine .ag-row {
@@ -13,7 +16,7 @@
 }
 
 .ag-center-cols-container {
-    height: 100% !important;
+    height: 100px !important;
 }
 
 .main .ag-header {
@@ -42,11 +45,11 @@
 
 .main .ag-row-odd {
     background-color: var(--color-theme-price-table-header) !important;
-    height: 28px !important;
+    height: px !important;
 }
 
 .main.ag-row-no-animation .ag-row {
-    height: 68px !important;
+    height: 100px !important;
 }
 
 .main .ag-row:hover {
