@@ -24,6 +24,14 @@ type Response struct {
 	Message     string `json:"message"`
 	Data        []API  `json:"data"`
 }
+type Response1 struct {
+	ID          int       `db:"id"`
+	Name        string    `db:"name"`
+	Description string    `db:"description"`
+	Code        string    `json:"code"`
+	Message     string    `json:"message"`
+	Data        []GetList `json:"data"`
+}
 
 type API struct {
 	StockNo     string  `json:"stockNo,omitempty"`
@@ -92,7 +100,8 @@ type GetList struct {
 }
 
 var Get1 Response
-var Get2 GetList
+
+var Get2 Response1
 
 func DoList(w http.ResponseWriter, r *http.Request) {
 	url := "https://iboard-query.ssi.com.vn/stock/group/VNIndex"
@@ -132,10 +141,10 @@ func DoList(w http.ResponseWriter, r *http.Request) {
 	}
 	// fmt.Println(string(body))
 
-	err = json.Unmarshal([]byte(body), &Get2)
+	err = json.Unmarshal([]byte(body), &Get1)
 	fmt.Println(err)
-	fmt.Println(Get2)
-	json.NewEncoder(w).Encode(Get2)
+	fmt.Println(Get1)
+	json.NewEncoder(w).Encode(Get1)
 
 }
 
@@ -181,11 +190,14 @@ func GroupList(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	fmt.Println(string(body))
-	err = json.Unmarshal([]byte(body), &Get1)
+	err = json.Unmarshal([]byte(body), &Get2)
 	fmt.Println(err)
-	fmt.Println(Get1.Data[4])
-	json.NewEncoder(w).Encode(Get1)
+	json.NewEncoder(w).Encode(Get2)
 
+}
+
+func GetListAPI(w http.ResponseWriter, r *http.Request) {
+	json.NewEncoder(w).Encode(Get2)
 }
 
 type Controller struct {
@@ -220,7 +232,7 @@ func main() {
 	db, err := sqlx.Connect("mysql", "root:123456@tcp(127.0.0.1:3306)/todo")
 	fmt.Printf("db: %v, err: %v\n", db, err)
 	if err != nil {
-		panic("Failed to connect to database")
+		panic("Failed to connect to API_iboard")
 	}
 	defer db.Close()
 	rows, err := db.Queryx("SELECT id, name, description FROM todo")
@@ -238,12 +250,13 @@ func main() {
 		values = append(values, v)
 	}
 
-	fmt.Printf("dodo: %v", values)
+	fmt.Printf("todo: %v", values)
 
 	router := mux.NewRouter()
 	router.Use(accessControlMiddleware)
 	router.HandleFunc("/todo", DoList).Methods("GET")
 	router.HandleFunc("/GroupList", GroupList).Methods("POST")
+	router.HandleFunc("/GetListAPI", GetListAPI).Methods("GET")
 	log.Fatal(http.ListenAndServe(":3001", router))
 
 }
