@@ -99,6 +99,16 @@ type GetList struct {
 	ExchangeLabel  string  `json:"ExchangeLabel,omitempty"`
 }
 
+var Time struct {
+	T []int    `json:"t,omitempty"`
+	C []string `json:"c,omitempty"`
+	O []string `json:"o,omitempty"`
+	H float64  `json:"h,omitempty"`
+	L int      `json:"l,omitempty"`
+	V string   `json:"v,omitempty"`
+	S string   `json:"s,omitempty"`
+}
+
 var Get1 Response
 
 var Get2 Response1
@@ -228,6 +238,175 @@ func accessControlMiddleware(next http.Handler) http.Handler {
 	})
 }
 
+func ApiChart1(w http.ResponseWriter, r *http.Request) {
+	url := "https://iboard.ssi.com.vn/dchart/api/history?resolution=D&symbol=VN30&from=1666320807&to=1700448867"
+	method := "GET"
+
+	client := &http.Client{}
+	req, err := http.NewRequest(method, url, nil)
+
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	req.Header.Add("authority", "iboard.ssi.com.vn")
+	req.Header.Add("accept", "application/json, text/plain, */*")
+	req.Header.Add("accept-language", "vi,vi-VN;q=0.9,en;q=0.8")
+	req.Header.Add("cookie", "__cf_bm=Fy.IPNgcusb7DdGpdhLu8Ne58iuO.YJjY6yo9SZ5bw4-1700448759-0-AcrTWF8o7FRQGUqPTvqla3ALpMWV8KisBCwGPr+/WoieYHYVI6tb4zj94oBuD+lVf8JoAloIoydJedc97Rz7Tzg=; skipQuerySector=1; _gid=GA1.3.2011612653.1700448763; _gat_gtag_UA_143755249_2=1; skipQueryAllStock=1; trading_view_chart_user_id=518550_1700448765408; _ga_EXPYE7627Z=GS1.1.1700448763.5.1.1700448800.0.0.0; _ga=GA1.1.1213548717.1700103340; _ga_N4QS6QWZH6=GS1.1.1700448762.7.1.1700448801.21.0.0; __cf_bm=z1m1xej55oXtpa14KS.5tM_QvOkjkizFtPelvWS_CWM-1715612414-1.0.1.1-tDnlR7cixrXydfMEoxun1roEQJsLm1ZfmZQEHRDY3QslfZjzHQPqSld577Xt0L2XQVWpW7QVUBssc7.HyNpCAg; _cfuvid=mPfjo5Nfw6RIr7vUQiO2.n5XTs_7fEbvRIFNrivQtdQ-1715612382688-0.0.1.1-604800000")
+	req.Header.Add("referer", "https://iboard.ssi.com.vn/chart/?symbol=ACB&language=vi&interval=D&theme=classic&target=tradingViewStockDetail&autosave=1")
+	req.Header.Add("sec-ch-ua", "\"Google Chrome\";v=\"119\", \"Chromium\";v=\"119\", \"Not?A_Brand\";v=\"24\"")
+	req.Header.Add("sec-ch-ua-mobile", "?0")
+	req.Header.Add("sec-ch-ua-platform", "\"Windows\"")
+	req.Header.Add("sec-fetch-dest", "empty")
+	req.Header.Add("sec-fetch-mode", "cors")
+	req.Header.Add("sec-fetch-site", "same-origin")
+	req.Header.Add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36")
+
+	res, err := client.Do(req)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	defer res.Body.Close()
+
+	body, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Println(string(body))
+
+	fmt.Println(string(body))
+	err = json.Unmarshal([]byte(body), &Time)
+	fmt.Println(err)
+	json.NewEncoder(w).Encode(Time)
+}
+func ApiChart2(w http.ResponseWriter, r *http.Request) {
+	url := "https://iboard.ssi.com.vn/dchart/api/history?resolution=D&symbol=VNINDEX&from=1666320807&to=1700448867"
+	method := "GET"
+
+	client := &http.Client{}
+	req, err := http.NewRequest(method, url, nil)
+
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	req.Header.Add("authority", "iboard.ssi.com.vn")
+	req.Header.Add("accept", "application/json, text/plain, */*")
+	req.Header.Add("accept-language", "vi,vi-VN;q=0.9,en;q=0.8")
+	req.Header.Add("cookie", "__cf_bm=Fy.IPNgcusb7DdGpdhLu8Ne58iuO.YJjY6yo9SZ5bw4-1700448759-0-AcrTWF8o7FRQGUqPTvqla3ALpMWV8KisBCwGPr+/WoieYHYVI6tb4zj94oBuD+lVf8JoAloIoydJedc97Rz7Tzg=; skipQuerySector=1; _gid=GA1.3.2011612653.1700448763; _gat_gtag_UA_143755249_2=1; skipQueryAllStock=1; trading_view_chart_user_id=518550_1700448765408; _ga_EXPYE7627Z=GS1.1.1700448763.5.1.1700448800.0.0.0; _ga=GA1.1.1213548717.1700103340; _ga_N4QS6QWZH6=GS1.1.1700448762.7.1.1700448801.21.0.0; __cf_bm=o.RYndGrjTJhvUdEj5x2Fz_waxv92zcwXsznjKUH44c-1715615361-1.0.1.1-geaIU68VekNbALsHfB.yuiWHzLWr75sKOpR8EOuKI.ckYzIsSlYEkEjaQPhLfw_Ponvq.k4de3yKgPQ2EMWSUw; _cfuvid=8n3alZZ0pEbYxWUT0GPyHvlB2RmxNIwzaes561EIwLU-1715614750439-0.0.1.1-604800000")
+	req.Header.Add("referer", "https://iboard.ssi.com.vn/chart/?symbol=ACB&language=vi&interval=D&theme=classic&target=tradingViewStockDetail&autosave=1")
+	req.Header.Add("sec-ch-ua", "\"Google Chrome\";v=\"119\", \"Chromium\";v=\"119\", \"Not?A_Brand\";v=\"24\"")
+	req.Header.Add("sec-ch-ua-mobile", "?0")
+	req.Header.Add("sec-ch-ua-platform", "\"Windows\"")
+	req.Header.Add("sec-fetch-dest", "empty")
+	req.Header.Add("sec-fetch-mode", "cors")
+	req.Header.Add("sec-fetch-site", "same-origin")
+	req.Header.Add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36")
+
+	res, err := client.Do(req)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	defer res.Body.Close()
+
+	body, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	fmt.Println(string(body))
+	err = json.Unmarshal([]byte(body), &Time)
+	fmt.Println(err)
+	json.NewEncoder(w).Encode(Time)
+}
+func ApiChart3(w http.ResponseWriter, r *http.Request) {
+	url := "https://iboard.ssi.com.vn/dchart/api/history?resolution=D&symbol=HNXIndex&from=1666320807&to=1700448867"
+	method := "GET"
+
+	client := &http.Client{}
+	req, err := http.NewRequest(method, url, nil)
+
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	req.Header.Add("authority", "iboard.ssi.com.vn")
+	req.Header.Add("accept", "application/json, text/plain, */*")
+	req.Header.Add("accept-language", "vi,vi-VN;q=0.9,en;q=0.8")
+	req.Header.Add("cookie", "__cf_bm=Fy.IPNgcusb7DdGpdhLu8Ne58iuO.YJjY6yo9SZ5bw4-1700448759-0-AcrTWF8o7FRQGUqPTvqla3ALpMWV8KisBCwGPr+/WoieYHYVI6tb4zj94oBuD+lVf8JoAloIoydJedc97Rz7Tzg=; skipQuerySector=1; _gid=GA1.3.2011612653.1700448763; _gat_gtag_UA_143755249_2=1; skipQueryAllStock=1; trading_view_chart_user_id=518550_1700448765408; _ga_EXPYE7627Z=GS1.1.1700448763.5.1.1700448800.0.0.0; _ga=GA1.1.1213548717.1700103340; _ga_N4QS6QWZH6=GS1.1.1700448762.7.1.1700448801.21.0.0; __cf_bm=o.RYndGrjTJhvUdEj5x2Fz_waxv92zcwXsznjKUH44c-1715615361-1.0.1.1-geaIU68VekNbALsHfB.yuiWHzLWr75sKOpR8EOuKI.ckYzIsSlYEkEjaQPhLfw_Ponvq.k4de3yKgPQ2EMWSUw; _cfuvid=8n3alZZ0pEbYxWUT0GPyHvlB2RmxNIwzaes561EIwLU-1715614750439-0.0.1.1-604800000")
+	req.Header.Add("referer", "https://iboard.ssi.com.vn/chart/?symbol=ACB&language=vi&interval=D&theme=classic&target=tradingViewStockDetail&autosave=1")
+	req.Header.Add("sec-ch-ua", "\"Google Chrome\";v=\"119\", \"Chromium\";v=\"119\", \"Not?A_Brand\";v=\"24\"")
+	req.Header.Add("sec-ch-ua-mobile", "?0")
+	req.Header.Add("sec-ch-ua-platform", "\"Windows\"")
+	req.Header.Add("sec-fetch-dest", "empty")
+	req.Header.Add("sec-fetch-mode", "cors")
+	req.Header.Add("sec-fetch-site", "same-origin")
+	req.Header.Add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36")
+
+	res, err := client.Do(req)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	defer res.Body.Close()
+
+	body, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	fmt.Println(string(body))
+	err = json.Unmarshal([]byte(body), &Time)
+	fmt.Println(err)
+	json.NewEncoder(w).Encode(Time)
+}
+func ApiChart4(w http.ResponseWriter, r *http.Request) {
+	url := "https://iboard.ssi.com.vn/dchart/api/history?resolution=D&symbol=HNXIndex&from=1666320807&to=1700448867"
+	method := "GET"
+
+	client := &http.Client{}
+	req, err := http.NewRequest(method, url, nil)
+
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	req.Header.Add("authority", "iboard.ssi.com.vn")
+	req.Header.Add("accept", "application/json, text/plain, */*")
+	req.Header.Add("accept-language", "vi,vi-VN;q=0.9,en;q=0.8")
+	req.Header.Add("cookie", "__cf_bm=Fy.IPNgcusb7DdGpdhLu8Ne58iuO.YJjY6yo9SZ5bw4-1700448759-0-AcrTWF8o7FRQGUqPTvqla3ALpMWV8KisBCwGPr+/WoieYHYVI6tb4zj94oBuD+lVf8JoAloIoydJedc97Rz7Tzg=; skipQuerySector=1; _gid=GA1.3.2011612653.1700448763; _gat_gtag_UA_143755249_2=1; skipQueryAllStock=1; trading_view_chart_user_id=518550_1700448765408; _ga_EXPYE7627Z=GS1.1.1700448763.5.1.1700448800.0.0.0; _ga=GA1.1.1213548717.1700103340; _ga_N4QS6QWZH6=GS1.1.1700448762.7.1.1700448801.21.0.0; __cf_bm=o.RYndGrjTJhvUdEj5x2Fz_waxv92zcwXsznjKUH44c-1715615361-1.0.1.1-geaIU68VekNbALsHfB.yuiWHzLWr75sKOpR8EOuKI.ckYzIsSlYEkEjaQPhLfw_Ponvq.k4de3yKgPQ2EMWSUw; _cfuvid=8n3alZZ0pEbYxWUT0GPyHvlB2RmxNIwzaes561EIwLU-1715614750439-0.0.1.1-604800000")
+	req.Header.Add("referer", "https://iboard.ssi.com.vn/chart/?symbol=ACB&language=vi&interval=D&theme=classic&target=tradingViewStockDetail&autosave=1")
+	req.Header.Add("sec-ch-ua", "\"Google Chrome\";v=\"119\", \"Chromium\";v=\"119\", \"Not?A_Brand\";v=\"24\"")
+	req.Header.Add("sec-ch-ua-mobile", "?0")
+	req.Header.Add("sec-ch-ua-platform", "\"Windows\"")
+	req.Header.Add("sec-fetch-dest", "empty")
+	req.Header.Add("sec-fetch-mode", "cors")
+	req.Header.Add("sec-fetch-site", "same-origin")
+	req.Header.Add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36")
+
+	res, err := client.Do(req)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	defer res.Body.Close()
+
+	body, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	fmt.Println(string(body))
+	err = json.Unmarshal([]byte(body), &Time)
+	fmt.Println(err)
+	json.NewEncoder(w).Encode(Time)
+}
 func main() {
 	db, err := sqlx.Connect("mysql", "root:123456@tcp(127.0.0.1:3306)/todo")
 	fmt.Printf("db: %v, err: %v\n", db, err)
@@ -257,6 +436,10 @@ func main() {
 	router.HandleFunc("/todo", DoList).Methods("GET")
 	router.HandleFunc("/GroupList", GroupList).Methods("POST")
 	router.HandleFunc("/GetListAPI", GetListAPI).Methods("GET")
+	router.HandleFunc("/ApiChart1", ApiChart1).Methods("GET")
+	router.HandleFunc("/ApiChart2", ApiChart2).Methods("GET")
+	router.HandleFunc("/ApiChart3", ApiChart3).Methods("GET")
+	router.HandleFunc("/ApiChart4", ApiChart4).Methods("GET")
 	log.Fatal(http.ListenAndServe(":3001", router))
 
 }

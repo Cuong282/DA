@@ -1,4 +1,4 @@
-package types
+package common
 
 type Response struct {
 	ID          int    `db:"id"`
@@ -7,6 +7,14 @@ type Response struct {
 	Code        string `json:"code"`
 	Message     string `json:"message"`
 	Data        []API  `json:"data"`
+}
+type Response1 struct {
+	ID          int       `db:"id"`
+	Name        string    `db:"name"`
+	Description string    `db:"description"`
+	Code        string    `json:"code"`
+	Message     string    `json:"message"`
+	Data        []GetList `json:"data"`
 }
 
 type API struct {
@@ -49,4 +57,28 @@ type API struct {
 	TradingUnit int `json:"tradingUnit,omitempty"`
 	// UnderlyingSymbol   string  `json:"underlyingSymbol,omitempty"`
 	CompanyNameEn int `json:"stockSycompanyNameEnmbol,omitempty"`
+}
+
+type GetList struct {
+	IndexId        string  `json:"indexId,omitempty"`
+	IndexValue     float32 `json:"indexValue,omitempty"`
+	PrevIndexValue float32 `json:"PrevIndexValue,omitempty"`
+	Time           int     `json:"Time,omitempty"`
+	Change         float32 `json:"Change,omitempty"`
+	ChangePercent  float32 `json:"ChangePercent,omitempty"`
+	ChartOpen      float32 `json:"ChartOpen,omitempty"`
+	Advances       int     `json:"Advances,omitempty"`
+	AllQty         int     `json:"AllQty,omitempty"`
+	AllValue       int     `json:"AllValue,omitempty"`
+	Ceiling        int     `json:"Ceiling,omitempty"`
+	ChartHigh      float32 `json:"ChartHigh,omitempty"`
+	ChartLowf      float32 `json:"ChartLowf,omitempty"`
+	Declines       int     `json:"Declines,omitempty"`
+	Floor          int     `json:"Floor,omitempty"`
+	Nochanges      int     `json:"Nochanges,omitempty"`
+	TimeMaker      int     `json:"TimeMaker,omitempty"`
+	TotalQtty      int     `json:"TotalQtty,omitempty"`
+	TotalValue     int     `json:"TotalValue,omitempty"`
+	Label          string  `json:"Label,omitempty"`
+	ExchangeLabel  string  `json:"ExchangeLabel,omitempty"`
 }
