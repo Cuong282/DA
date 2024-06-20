@@ -74,37 +74,107 @@ func (b *Business) GetGroupList(w http.ResponseWriter, r *http.Request) {
 }
 
 type Response struct {
-	Ok      bool            `json:"ok"`
-	Message string          `json:"message"`
-	Status  int             `json:"status"`
-	Data    *dataobject.API `json:"data"`
+	Ok      bool                `json:"ok"`
+	Message string              `json:"message"`
+	Status  int                 `json:"status"`
+	Data    *dataobject.GetList `json:"data"`
 }
 
 // type
 
+type DataFromLinkNQ struct {
+	ID          int          `db:"id"`
+	Name        string       `db:"name"`
+	Description string       `db:"description"`
+	Code        string       `json:"code"`
+	Message     string       `json:"message"`
+	Data        []*StockData `json:"data"`
+}
+
+type StockData struct {
+	IndexId        string  `db:"indexId,omitempty"`
+	IndexValue     float32 `db:"indexValue,omitempty"`
+	PrevIndexValue float32 `db:"PrevIndexValue,omitempty"`
+	Time           int     `db:"Time,omitempty"`
+	Change         float32 `db:"Change,omitempty"`
+	ChangePercent  float32 `db:"ChangePercent,omitempty"`
+	ChartOpen      float32 `db:"ChartOpen,omitempty"`
+	Advances       int     `db:"Advances,omitempty"`
+	AllQty         int     `db:"AllQty,omitempty"`
+	AllValue       int     `db:"AllValue,omitempty"`
+	Ceiling        int     `db:"Ceiling,omitempty"`
+	ChartHigh      float32 `db:"ChartHigh,omitempty"`
+	ChartLowf      float32 `db:"ChartLowf,omitempty"`
+	Declines       int     `db:"Declines,omitempty"`
+	Floor          int     `db:"Floor,omitempty"`
+	Nochanges      int     `db:"Nochanges,omitempty"`
+	TimeMaker      int     `db:"TimeMaker,omitempty"`
+	TotalQtty      int     `db:"TotalQtty,omitempty"`
+	TotalValue     int     `db:"TotalValue,omitempty"`
+	Label          string  `db:"Label,omitempty"`
+	ExchangeLabel  string  `db:"ExchangeLabel,omitempty"`
+}
+
+var dataLinkNQ = DataFromLinkNQ{
+	ID:          0,
+	Name:        "",
+	Description: "",
+	Code:        "SUCCESS",
+	Message:     "Call API /exchange-index/multiple successful",
+	Data: []*StockData{
+		{
+			IndexId:       "MBBank",
+			IndexValue:    10,
+			ChangePercent: 2.5,
+		},
+		{
+			IndexId:       "HDBank",
+			IndexValue:    1.2,
+			ChangePercent: 2.5,
+		},
+		{
+			IndexId:       "TpBank",
+			IndexValue:    1.2,
+			ChangePercent: 2.5,
+		},
+		{
+			IndexId:       "BIDV",
+			IndexValue:    1.2,
+			ChangePercent: 2.5,
+		},
+		{
+			IndexId:       "VPBank",
+			IndexValue:    1.2,
+			ChangePercent: 2.5,
+		},
+	},
+}
+
 func (b *Business) CreateTodo(w http.ResponseWriter, r *http.Request) {
-	// r
-	// id name description
-	todo := &dataobject.API{
-		// ID:          1,
-		StockNo:  "123",
-		Best1Bid: 12,
+	// []API
+
+	for i, stock := range dataLinkNQ.Data {
+		fmt.Printf("api data index i: %d, stock: %v\n", i, stock)
+		api := &dataobject.APIDO{
+			IndexId:       stock.IndexId,
+			IndexValue:    stock.IndexValue,
+			ChangePercent: stock.ChangePercent,
+		}
+		b.storage.Insert(api)
+		break
 	}
-	b.storage.Insert(todo)
-	// if err
-	//  w.Write()
-	reponse := &Response{
-		Ok:      true,
-		Message: "create todo success!",
-		Status:  1,
-		Data:    todo,
-	}
-	studentsJson, err := json.Marshal(reponse)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-	w.Write(studentsJson)
+	// reponse := &Response{
+	// 	Ok:      true,
+	// 	Message: "create todo success!",
+	// 	Status:  1,
+	// 	Data:    todo,
+	// }
+	// studentsJson, err := json.Marshal(reponse)
+	// if err != nil {
+	// 	http.Error(w, err.Error(), http.StatusInternalServerError)
+	// 	return
+	// }
+	w.Write([]byte("oke"))
 
 }
 

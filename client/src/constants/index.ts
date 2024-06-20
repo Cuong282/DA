@@ -45,7 +45,7 @@ export const listMenus = [
     },
     {
         name: "kHUYẾN NGHỊ ĐẦU TƯ",
-        path: "",
+        path: "/theodoi",
      
     },
     {

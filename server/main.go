@@ -188,8 +188,8 @@ func accessControlMiddleware(next http.Handler) http.Handler {
 }
 
 func main() {
-	db, err := sqlx.Connect("mysql", "root:123456@tcp(127.0.0.1:3306)/todo")
-	fmt.Printf("db: %v, err: %v\n", db, err)
+	db, err := sqlx.Connect("mysql", "root:123456@tcp(127.0.0.1:3306)/database")
+	fmt.Println("connect seccest", db, err)
 	if err != nil {
 		panic("Failed to connect to API_iboard")
 	}
@@ -203,6 +203,7 @@ func main() {
 	router.HandleFunc("/todo", DoList).Methods("GET")
 	router.HandleFunc("/GroupList", biz.GetGroupList).Methods("POST")
 	router.HandleFunc("/GetListAPI", biz.GetGroupList).Methods("GET")
+	router.HandleFunc("/GroupList", biz.GetGroupList).Methods("GET")
 	router.HandleFunc("/newTodo", biz.CreateTodo).Methods("POST")
 	// router.HandleFunc("/ApiChart1", ApiChart1).Methods("GET")
 	// router.HandleFunc("/ApiChart2", ApiChart2).Methods("GET")

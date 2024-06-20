@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import PriceBoard from "./pages/PriceBoard";
 import Nopage from "./pages/Nopage";
 import Layout from "./Layouts/Layout";
+import IndexList from "./pages/Nopage/indexlist";
 
 
 const Demo = () => {
@@ -18,8 +19,9 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<PriceBoard />} />
-          <Route path="/bieu-do-ky-thuat" element={<Demo />} />
-          <Route path="*" element={<Nopage />} />
+          <Route path="/s-products" element={<Nopage />} />
+          <Route path="/theodoi" element={<IndexList />} />
+
         </Route>
       </Routes>
     </BrowserRouter>

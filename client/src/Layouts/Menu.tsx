@@ -64,8 +64,6 @@ const Menu = () => {
       <ul className="w-full flex ">
         <GetMenus active={active} setActive={setActive} />
         <div className="flex items-center text-theme-text-tertiary ml-2px">
-          
-          
         </div>
       </ul>
       </div>

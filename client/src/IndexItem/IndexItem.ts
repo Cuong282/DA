@@ -3,14 +3,7 @@ import { ThemeConfig } from "antd";
 export const listItemBoard = [
     {
         name: "Danh mục của tôi",
-        path: "",
-        childrent: [
-            {
-                name: "",
-                path: "/",
-            },
-           
-        ],
+       
     },
     {
         name: "VN30",

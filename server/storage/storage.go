@@ -25,7 +25,7 @@ func NewSQLStorage(db *sqlx.DB) *SQLStorage {
 func (s *SQLStorage) SelectAllTodos() []dataobject.TodoDO {
 	myCtx, cancelFunc := context.WithTimeout(context.Background(), SQLTimeOut)
 	defer cancelFunc()
-	var query = "SELECT id, name, description FROM todo"
+	var query = "SELECT IndexId, IndexValue, description FROM database"
 	rows, err := s.DB.QueryxContext(myCtx, query)
 
 	if err != nil {
@@ -67,17 +67,22 @@ func (s *SQLStorage) SelectAllTodos() []dataobject.TodoDO {
 // 	// s.DB.Queryx()
 // }
 
-func (dao *SQLStorage) Insert(do *dataobject.API) int64 {
+func (dao *SQLStorage) Insert(do *dataobject.APIDO) int64 {
 	// myCtx, cancelFunc := context.WithTimeout(context.Background(), 3*time.Second)
 	// defer cancelFunc()
-
-	var query = "insert into todo(StockNo , Best1Bid    ) values (:StockNo, :Best1Bid    )"
+	// var query = `insert into api(IndexId, IndexValue, ChangePercent) values (:IndexId, :IndexValue,:ChangePercent)`
+	var query = `insert into api(IndexId, IndexValue, ChangePercent) values (?, ?, ?)`
 	r, err := dao.DB.NamedExec(query, do)
-	if err != nil {
+	fmt.Printf(">>>>>>>>>>>>>SQLStorage.Insert r: %v, err: %v\n", r, err)
 
+	if err != nil {
 		return 0
 	}
+	lastID, err := r.LastInsertId()
+	fmt.Printf("lastID: %d, err: %v\n", lastID, err)
 
+	rowsAffectd, err := r.RowsAffected()
+	fmt.Printf("rowsAffectd: %d, err: %v\n", rowsAffectd, err)
 	id, err := r.LastInsertId()
 	if err != nil {
 

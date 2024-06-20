@@ -19,9 +19,7 @@ import { GetApi } from "../../services";
 
 
 const TableMain = () => {
-  const getWidthFromPercent = (Percent: number, width: number): number => {
-    return width / Percent;
-  };
+
   const gridRef = useRef<AgGridReact<IOlympicData>>(null);
   const rowPin: any = useRef([]);
   const [saves,serSaves]= useState();

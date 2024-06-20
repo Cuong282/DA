@@ -1,43 +1,29 @@
 import React from "react";
 import {
-  LaptopOutlined,
-  NotificationOutlined,
   FundOutlined,
-  TeamOutlined,
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Breadcrumb, Layout, Menu, theme } from "antd";
-import { Route, Routes } from "react-router-dom";
 import News from "./News";
 
-const { Header, Content, Footer, Sider } = Layout;
-// const items1: MenuProps['items'] = ['1', '2', '3'].map((key) => ({
-//   key,
-//   label: `nav ${key}`,
-// }));
+const {  Content, Footer, Sider } = Layout;
 
 const items2: MenuProps["items"] = [
   FundOutlined,
-  LaptopOutlined,
-  NotificationOutlined,
-  TeamOutlined,
-  UploadOutlined,
+
 ].map((icon, index) => {
   const key = String(index + 1);
 
   return {
     key: `sub${key}`,
     icon: React.createElement(icon),
-    label: `table ${key}`,
+    label: `chỉ số ${key}`,
 
     children: new Array(2).fill(null).map((_, j) => {
       const subKey = index * 5 + j + 1;
       return {
         key: subKey,
-        label: `option${subKey}`,
+        label: `mã CK${subKey}`,
       };
     }),
   };
@@ -49,16 +35,6 @@ const Nopage = () => {
   return (
     <>
       <Layout>
-        {/* <Header style={{ display: 'flex', alignItems: 'center' }}>
-        <div className="demo-logo" />
-        <Menu
-          theme="dark"
-          mode="horizontal"
-          defaultSelectedKeys={['2']}
-          items={items1}
-          style={{ flex: 1, minWidth: 0 }}
-        />
-      </Header> */}
         <Content style={{ padding: "0 48px", height: "100%" }}>
           <Breadcrumb style={{ margin: "20px 0" }}>
           </Breadcrumb>
@@ -85,6 +61,7 @@ const Nopage = () => {
           </Layout>
         </Content>
         <Footer style={{ textAlign: "center" }}>
+            <h1>thị trường</h1>
         </Footer>
       </Layout>
     </>
