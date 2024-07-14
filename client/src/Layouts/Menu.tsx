@@ -2,7 +2,6 @@ import React, { Dispatch, SetStateAction, useState } from "react";
 import { BiChevronDown, BiChevronUp } from "react-icons/bi";
 import { listMenus } from "../constants";
 import { useLocation, useNavigate } from "react-router-dom";
-import { CloseOutlined, MenuOutlined } from "@ant-design/icons";
 import "./Menu.css";
 interface getMenus {
   active: number;

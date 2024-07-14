@@ -15,7 +15,7 @@ interface getMenus {
 // const [button,setButton]= useState("");
 const GetMenus = ({ active, setActive }: getMenus) => {
   const navigate = useNavigate();
-  const location = useLocation();
+ 
   return (
     <>
       {listItemBoard.map((item, index) => (
@@ -141,7 +141,7 @@ const Menu = () => {
                         />
                       </div>
                       <div className="flex items-center justify-between">
-                        <p>Sắp xếp realtime</p>
+                        <p>BY</p>
                         <Switch
                           size="small"
                           defaultChecked

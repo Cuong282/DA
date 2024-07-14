@@ -249,8 +249,9 @@ export const listMenus = [
     },
     {
         name: "DANH MỤC CỦA TÔI",
-        path: "/s-products",
+        path: "/danhmuc",
     },
+  
 ];
 
 export const routers = [];
