@@ -147,6 +147,21 @@ var dataLinkNQ = DataFromLinkNQ{
 			IndexValue:    1.2,
 			ChangePercent: 2.5,
 		},
+		{
+			IndexId:       "VPBank",
+			IndexValue:    1.2,
+			ChangePercent: 2.5,
+		},
+		{
+			IndexId:       "VPBank",
+			IndexValue:    1.2,
+			ChangePercent: 2.5,
+		},
+		{
+			IndexId:       "VPBank",
+			IndexValue:    1.2,
+			ChangePercent: 2.5,
+		},
 	},
 }
 

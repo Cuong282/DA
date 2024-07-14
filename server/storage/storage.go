@@ -58,19 +58,7 @@ func (s *SQLStorage) SelectAllTodos() []dataobject.TodoDO {
 	return todos
 }
 
-// func (s *SQLStorage) InsertTodo(do *dataobject.TodoDO) int64 {
-// 	// query
-
-// }
-
-// func (s *SQLStorage) InsertStock(do *dataobject.API) int64 {
-// 	// s.DB.Queryx()
-// }
-
 func (dao *SQLStorage) Insert(do *dataobject.APIDO) int64 {
-	// myCtx, cancelFunc := context.WithTimeout(context.Background(), 3*time.Second)
-	// defer cancelFunc()
-	// var query = `insert into api(IndexId, IndexValue, ChangePercent) values (:IndexId, :IndexValue,:ChangePercent)`
 	var query = `insert into api(IndexId, IndexValue, ChangePercent) values (?, ?, ?)`
 	r, err := dao.DB.NamedExec(query, do)
 	fmt.Printf(">>>>>>>>>>>>>SQLStorage.Insert r: %v, err: %v\n", r, err)

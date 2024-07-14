@@ -1,20 +1,19 @@
 package main
 
 import (
+	"database/sql"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
 
-	"database/sql"
-
 	"github.com/akhilsharma/todo/business"
+	Signup "github.com/akhilsharma/todo/signup"
 	"github.com/akhilsharma/todo/storage"
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/gorilla/mux"
 	"github.com/jmoiron/sqlx"
-
-	_ "github.com/go-sql-driver/mysql"
 )
 
 type Response struct {
@@ -100,15 +99,15 @@ type GetList struct {
 	ExchangeLabel  string  `json:"ExchangeLabel,omitempty"`
 }
 
-var Time struct {
-	T []int    `json:"t,omitempty"`
-	C []string `json:"c,omitempty"`
-	O []string `json:"o,omitempty"`
-	H float64  `json:"h,omitempty"`
-	L int      `json:"l,omitempty"`
-	V string   `json:"v,omitempty"`
-	S string   `json:"s,omitempty"`
-}
+// var Time struct {
+// 	T []int    `json:"t,omitempty"`
+// 	C []string `json:"c,omitempty"`
+// 	O []string `json:"o,omitempty"`
+// 	H float64  `json:"h,omitempty"`
+// 	L int      `json:"l,omitempty"`
+// 	V string   `json:"v,omitempty"`
+// 	S string   `json:"s,omitempty"`
+// }
 
 var Get1 Response
 
@@ -197,18 +196,27 @@ func main() {
 
 	sqlStorage := storage.NewSQLStorage(db)
 	biz := business.NewBusiness(sqlStorage)
-
+	signupInstance := Signup.SignUp
+	fmt.Println("signupInstance", signupInstance)
 	router := mux.NewRouter()
 	router.Use(accessControlMiddleware)
+
 	router.HandleFunc("/todo", DoList).Methods("GET")
 	router.HandleFunc("/GroupList", biz.GetGroupList).Methods("POST")
 	router.HandleFunc("/GetListAPI", biz.GetGroupList).Methods("GET")
 	router.HandleFunc("/GroupList", biz.GetGroupList).Methods("GET")
 	router.HandleFunc("/newTodo", biz.CreateTodo).Methods("POST")
+
+	// router.HandleFunc("/signup", signupInstance.signup).Methods("POST")
+	// router.HandleFunc("/signin", signin).Methods("POST")
+	// http.HandleFunc("/welcome", welcome).Methods("POST")
+	// http.HandleFunc("/refresh", Refresh)
+	// http.HandleFunc("/logout", Logout)
 	// router.HandleFunc("/ApiChart1", ApiChart1).Methods("GET")
 	// router.HandleFunc("/ApiChart2", ApiChart2).Methods("GET")
 	// router.HandleFunc("/ApiChart3", ApiChart3).Methods("GET")
 	// router.HandleFunc("/ApiChart4", ApiChart4).Methods("GET")
-	log.Fatal(http.ListenAndServe(":3001", router))
-
+	log.Fatal(http.ListenAndServe(":8000", router))
+	fmt.Println("Server is running on port 8000")
+	// log.Fatal(http.ListenAndServe(":8000", nil))
 }
