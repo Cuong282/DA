@@ -9,8 +9,8 @@ import (
 	"net/http"
 
 	"github.com/akhilsharma/todo/business"
-	Signup "github.com/akhilsharma/todo/signup"
 	"github.com/akhilsharma/todo/storage"
+	"github.com/akhilsharma/todo/utils"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/gorilla/mux"
 	"github.com/jmoiron/sqlx"
@@ -114,6 +114,17 @@ var Get1 Response
 var Get2 Response1
 
 func DoList(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("hello todo")
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	resp := make(map[string]string)
+	resp["message"] = "Status Created"
+	jsonResp, err := json.Marshal(resp)
+	if err != nil {
+		log.Fatalf("Error happened in JSON marshal. Err: %s", err)
+	}
+	w.Write(jsonResp)
+	return
 	url := "https://iboard-query.ssi.com.vn/stock/group/VNIndex"
 	method := "GET"
 
@@ -186,18 +197,22 @@ func accessControlMiddleware(next http.Handler) http.Handler {
 	})
 }
 
+var (
+	db    *sqlx.DB
+	errDb error
+)
+
 func main() {
-	db, err := sqlx.Connect("mysql", "root:123456@tcp(127.0.0.1:3306)/database")
-	fmt.Println("connect seccest", db, err)
-	if err != nil {
-		panic("Failed to connect to API_iboard")
+	db, errDb = sqlx.Open("mysql", "root:123456@tcp(127.0.0.1:3306)/database")
+	fmt.Println("connect seccest", db, errDb)
+	if errDb != nil {
+		panic("Failed to connect to database")
 	}
 	defer db.Close()
 
 	sqlStorage := storage.NewSQLStorage(db)
 	biz := business.NewBusiness(sqlStorage)
-	signupInstance := Signup.SignUp
-	fmt.Println("signupInstance", signupInstance)
+	fmt.Println("db123:", db)
 	router := mux.NewRouter()
 	router.Use(accessControlMiddleware)
 
@@ -207,16 +222,13 @@ func main() {
 	router.HandleFunc("/GroupList", biz.GetGroupList).Methods("GET")
 	router.HandleFunc("/newTodo", biz.CreateTodo).Methods("POST")
 
-	// router.HandleFunc("/signup", signupInstance.signup).Methods("POST")
-	// router.HandleFunc("/signin", signin).Methods("POST")
-	// http.HandleFunc("/welcome", welcome).Methods("POST")
-	// http.HandleFunc("/refresh", Refresh)
-	// http.HandleFunc("/logout", Logout)
-	// router.HandleFunc("/ApiChart1", ApiChart1).Methods("GET")
-	// router.HandleFunc("/ApiChart2", ApiChart2).Methods("GET")
-	// router.HandleFunc("/ApiChart3", ApiChart3).Methods("GET")
-	// router.HandleFunc("/ApiChart4", ApiChart4).Methods("GET")
-	log.Fatal(http.ListenAndServe(":8000", router))
-	fmt.Println("Server is running on port 8000")
+	router.HandleFunc("/signup", utils.Signup).Methods("POST")
+	router.HandleFunc("/signin", utils.Signin).Methods("POST")
+	router.HandleFunc("/welcome", utils.Welcome).Methods("GET")
+	router.HandleFunc("/refresh", utils.Refresh).Methods("GET")
+	router.HandleFunc("/logout", utils.Logout).Methods("GET")
+
+	log.Fatal(http.ListenAndServe(":3001", router))
+	fmt.Println("Server is running on port 3001")
 	// log.Fatal(http.ListenAndServe(":8000", nil))
 }

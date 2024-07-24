@@ -1,13 +1,15 @@
-package Signup
+package utils
 
 import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 	"strings"
 	"time"
 
+	"github.com/akhilsharma/todo/logger"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/jmoiron/sqlx"
@@ -19,28 +21,15 @@ var (
 	errDb error
 )
 
-func SignUp() {
-
+func init() {
 	db, errDb = sqlx.Open("mysql", "root:123456@tcp(127.0.0.1:3306)/database")
-	fmt.Println("connect seccest", db, errDb)
 	if errDb != nil {
-		panic("Failed to connect to login")
+		log.Fatal("Failed to connect to database: ", errDb)
 	}
-	defer db.Close()
-	fmt.Println("db: ", db)
-	http.HandleFunc("/signup", signup)
-	// http.HandleFunc("/signupp", SignUp)
-	http.HandleFunc("/signin", signin)
-	http.HandleFunc("/welcome", welcome)
-	http.HandleFunc("/refresh", Refresh)
-	http.HandleFunc("/logout", Logout)
-	fmt.Println("Server is running on port 8000")
-
 }
 
 var jwtKey = []byte("secret_key")
 
-// Create a struct that models the structure of a user, both in the request body, and in the DB
 type Credentials struct {
 	Email    string `json:"email"`
 	Password string `json:"password"`
@@ -58,7 +47,7 @@ type User struct {
 
 var users = map[string]User{}
 
-func signup(w http.ResponseWriter, r *http.Request) {
+func Signup(w http.ResponseWriter, r *http.Request) {
 	var user User
 
 	err := json.NewDecoder(r.Body).Decode(&user)
@@ -106,35 +95,25 @@ func signup(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("email:", email)
 	password := user.Password
 	fmt.Println("password:", password)
-	fmt.Println("db", db)
 
-	query := `INSERT INTO user (email, password) VALUES (?,?)`
-	fmt.Println("query:", query)
-	fmt.Println("values:", user.Email, user.Password)
-
-	result, err := db.Exec(query, user.Email, user.Password)
+	_, err = db.Exec("INSERT INTO user (email, password) VALUES (?,?)", user.Email, user.Password)
 	if err != nil {
-		fmt.Println("error:", err)
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 
-	id, err := result.LastInsertId()
-	fmt.Printf("id inserted: %d, err: %v\n", id, err)
-
 	w.WriteHeader(http.StatusOK)
 	fmt.Fprint(w, "User created successfully!")
 }
-
-func signin(w http.ResponseWriter, r *http.Request) {
+func Signin(w http.ResponseWriter, r *http.Request) {
+	fmt.Println(">>>>>>>>>>>>>>>>>>>>>>>>>>")
 	var creds Credentials
-
 	err := json.NewDecoder(r.Body).Decode(&creds)
 	if err != nil {
-		// Nếu có lỗi khi giải mã request body, trả về mã lỗi HTTP 400 Bad Request
-		w.WriteHeader(http.StatusBadRequest)
+		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
+	fmt.Printf("api signIn decode creds: %s\n", logger.JSONDebugDataString(creds))
 
 	var userEmail string
 	err = db.QueryRow("SELECT email FROM user WHERE email =?", creds.Email).Scan(&userEmail)
@@ -146,6 +125,7 @@ func signin(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+	fmt.Printf("api signIn userEmail: %s\n", userEmail)
 
 	if userEmail == creds.Email {
 		var user User
@@ -154,17 +134,20 @@ func signin(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
-		fmt.Println("user:", user)
+		fmt.Printf("api signIn user: %s\n", logger.JSONDebugDataString(user))
+
 		err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(creds.Password))
 		if err != nil {
-			http.Error(w, "Invalid email or password", http.StatusUnauthorized)
+			if err == bcrypt.ErrMismatchedHashAndPassword {
+				http.Error(w, "Invalid email or password", http.StatusUnauthorized)
+				return
+			}
+			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
-		fmt.Println("err:", err)
-
 	}
 
-	expirationTime := time.Now().Add(5 * time.Minute)
+	expirationTime := time.Now().Add(1 * time.Minute)
 	claims := &Claims{
 		Email: creds.Email,
 		RegisteredClaims: jwt.RegisteredClaims{
@@ -174,19 +157,37 @@ func signin(w http.ResponseWriter, r *http.Request) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	tokenString, err := token.SignedString(jwtKey)
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+	fmt.Printf("api signIn succes token: %s\n", tokenString)
+
+	w.Header().Set("Content-Type", "application/json")
 	http.SetCookie(w, &http.Cookie{
 		Name:     "token",
 		Value:    tokenString,
 		Expires:  expirationTime,
 		HttpOnly: true,
 	})
-
+	// fmt.Fprint(w, "Signed in successfully!")
+	w.WriteHeader(http.StatusOK)
+	w.Header().Set("Content-Type", "application/json")
+	resp := make(map[string]string)
+	resp["message"] = "Status Created"
+	jsonResp, err := json.Marshal(resp)
+	if err != nil {
+		log.Fatalf("Error happened in JSON marshal. Err: %s", err)
+	}
+	w.Write(jsonResp)
+	// w.Write([]byte("Hello, World!"))
+	// json.NewEncoder(w).Encode(creds)
 }
 
-func welcome(w http.ResponseWriter, r *http.Request) {
+// type us struct {
+// 	Ok string `json:"ok"`
+// }
+
+func Welcome(w http.ResponseWriter, r *http.Request) {
 	// Lấy cookie tên "token" từ yêu cầu
 	c, err := r.Cookie("token")
 	fmt.Println("tokéntring:", c)
@@ -278,4 +279,6 @@ func Logout(w http.ResponseWriter, r *http.Request) {
 		Name:    "token",
 		Expires: time.Now(),
 	})
+
+	fmt.Println("logout is ok!")
 }

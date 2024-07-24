@@ -9,20 +9,15 @@ import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import "../../styles/agGrid.css";
-import {
-  CellClickedEvent,
-  ColDef,
-} from "ag-grid-community";
+import { CellClickedEvent, ColDef } from "ag-grid-community";
 import { IOlympicData } from "../../interfaces/interfaces";
 import CustomCellRenderer from "./customCellRenderer";
 import { GetApi } from "../../services";
 
-
 const TableMain = () => {
-
   const gridRef = useRef<AgGridReact<IOlympicData>>(null);
   const rowPin: any = useRef([]);
-  const [saves,serSaves]= useState();
+  const [saves, serSaves] = useState();
   function findWithAttr(array: any[], attr: string, value: string) {
     for (var i = 0; i < array.length; i += 1) {
       if (array[i][attr] === value) {
@@ -33,26 +28,26 @@ const TableMain = () => {
   }
 
   const ragCellClassRules = {
-    'rag-green-outer': (params:any) => params.value > 40,
-    'rag-yellow-outer': (params:any) => params.value >= 30 && params.value < 40,
-    'rag-red-outer': (params:any) => params.value < 30,
+    "rag-green-outer": (params: any) => params.value > 40,
+    "rag-yellow-outer": (params: any) =>
+      params.value >= 30 && params.value < 40,
+    "rag-red-outer": (params: any) => params.value < 30,
   };
-  const ragRenderer = (params:any) => {
+  const ragRenderer = (params: any) => {
     return <span className="rag-element">{params.value}</span>;
   };
 
-  const containerStyle = useMemo(() => ({ width: '100%', height: '100%' }), []);
-  const gridStyle = useMemo(() => ({ height: '100%', width: '100%' }), []);
+  const containerStyle = useMemo(() => ({ width: "100%", height: "100%" }), []);
+  const gridStyle = useMemo(() => ({ height: "100%", width: "100%" }), []);
   const getDefaultCol = (widthChange: number | undefined): ColDef<any>[] => {
     const width = document.getElementById("root")?.offsetWidth || 0;
     if (!widthChange) widthChange = width;
 
-  
     const columnDefs = [
       {
         field: "",
         width: 5,
-     
+
         cellRenderer: CustomCellRenderer,
         sortable: true,
         cellClass: "custom-athlete-cell",
@@ -81,12 +76,10 @@ const TableMain = () => {
       },
       {
         headerName: "khớp lệnh",
- 
         minWidth: 150,
         marryChildren: true,
         children: [
           {
-           
             field: "Giá",
             cellClassRules: ragCellClassRules,
             cellRenderer: ragRenderer,
@@ -97,7 +90,6 @@ const TableMain = () => {
             },
           },
           {
-         
             field: "KL",
             width: 70,
             cellStyle: {
@@ -106,7 +98,6 @@ const TableMain = () => {
             },
           },
           {
-           
             field: "+/-",
             width: 70,
             cellStyle: {
@@ -115,7 +106,6 @@ const TableMain = () => {
             },
           },
           {
-          
             field: "+/-(%)",
             width: 70,
             cellStyle: {
@@ -126,7 +116,6 @@ const TableMain = () => {
         ],
       },
       {
-    
         field: "Trần",
         width: 70,
         cellStyle: {
@@ -134,7 +123,6 @@ const TableMain = () => {
         },
       },
       {
-     
         field: "Sàn",
         width: 70,
         cellStyle: {
@@ -142,7 +130,6 @@ const TableMain = () => {
         },
       },
       {
-  
         field: "TC",
         width: 70,
         cellStyle: {
@@ -154,12 +141,12 @@ const TableMain = () => {
         headerName: "bên mua",
         marryChildren: true,
         children: [
-          {  field: "Giá3", width: 70 },
-          {  field: "KL3", width: 70 },
+          { field: "Giá3", width: 70 },
+          { field: "KL3", width: 70 },
           { field: "Giá2", width: 70 },
           { field: "KL2", width: 70 },
-          {  field: "Giá1", width: 70 },
-          {  field: "KL1", width: 70 },
+          { field: "Giá1", width: 70 },
+          { field: "KL1", width: 70 },
         ],
       },
 
@@ -175,29 +162,27 @@ const TableMain = () => {
           { field: "kL3", width: 70 },
         ],
       },
-          {
-            field: "TổngKL",
-            width: 90,
-            cellStyle: {
-           color: "var(--color-theme-text-tertiary)",
-              
-            },
-          },
-          {
-            field: "Cao",
-            width: 70,
-            cellStyle: {
-              color: "var(--color-theme-text-up)",
-            },
-          },
-          {
-            field: "Thấp",
-            width: 70,
-            cellStyle: {
-              color: "var(--color-classic-text-down)",
-            },
-          },
-      
+      {
+        field: "TổngKL",
+        width: 90,
+        cellStyle: {
+          color: "var(--color-theme-text-tertiary)",
+        },
+      },
+      {
+        field: "Cao",
+        width: 70,
+        cellStyle: {
+          color: "var(--color-theme-text-up)",
+        },
+      },
+      {
+        field: "Thấp",
+        width: 70,
+        cellStyle: {
+          color: "var(--color-classic-text-down)",
+        },
+      },
 
       {
         headerName: "ĐTNN",
@@ -251,17 +236,14 @@ const TableMain = () => {
 
   function getNewdata() {
     GetApi()
-        .then((result) => {
-            console.log("Call data:", result.data);
-            const data =convertData(result.data .slice(0,30));;
-            console.log("data:", data);
-            setRowData(data);
-        })
-        .catch((error) => {
-            console.error("Error fetching data:", error);
-        });
-}
-
+      .then((result) => {
+        const data = convertData(result.data.slice(0, 30));
+        setRowData(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }
 
   function convertData(data: any) {
     return (
@@ -271,9 +253,9 @@ const TableMain = () => {
           "": item.stockSymbol,
           CK: item.stockSymbol,
           Giá: new Intl.NumberFormat("en-US").format(item.matchedPrice / 1000),
-          KL: item.matchedPrice/100 ,
+          KL: item.matchedPrice / 100,
           "+/-": item.matchedPrice / 1000,
-          "+/-(%)": item.matchedPrice/10,
+          "+/-(%)": item.matchedPrice / 10,
           Trần: item.refPrice / 1000,
           TC: item.refPrice / 1000,
           Sàn: item.floor / 1000,
@@ -312,16 +294,11 @@ const TableMain = () => {
 
   return (
     <div
-    className="price-board-table_main flex-1 overflow-y-auto
+      className="price-board-table_main flex-1 overflow-y-auto
      ag-theme-alpine ag-header-row-no-group.ag-header-row-label-left .ag-header-cell-label"
-    style={containerStyle}
-  >
-      <div
-        style={gridStyle}
-        className={
-          "ag-theme-quartz"
-        }
-      >
+      style={containerStyle}
+    >
+      <div style={gridStyle} className={"ag-theme-quartz"}>
         <AgGridReact<IOlympicData>
           rowData={rowData}
           ref={gridRef}

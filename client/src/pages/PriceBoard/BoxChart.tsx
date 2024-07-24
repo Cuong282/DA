@@ -108,8 +108,6 @@ const BoxChart = () => {
   async function getdata() {
     const data: any = await ListApi();
     setData(data.data);
-    console.log("121321:",data)
-
   }
 
   useEffect(() => {
@@ -125,7 +123,7 @@ const BoxChart = () => {
             return (
               <>
                 <div className=" flex-1 p-2 bg-theme-secondary rounded" key={i}>
-                  <div className="index-value h-full" key={i}>
+                  <div className="index-value h-full">
                     {
                       <HightCharts  />
                       }
