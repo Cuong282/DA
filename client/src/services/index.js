@@ -37,27 +37,29 @@ export async function ListApi() {
   }
 }
 
-export async function LOGIN(){
+// export async function LOGIN(){
 
-  const myHeaders = new Headers();
-  myHeaders.append("Content-Type", "application/json");
+//   const myHeaders = new Headers();
+//   myHeaders.append("Content-Type", "application/json");
   
-  const raw = JSON.stringify({
-    "email": "cuong@gmail.com",
-    "password": "1234567"
-  });
+//   const raw = JSON.stringify({
+//     "email": "cuong@gmail.com",
+//     "password": "1234567"
+//   });
   
-  const requestOptions = {
-    method: "POST",
-    headers: myHeaders,
-    body: raw,
-    redirect: "follow"
-  };
+//   const requestOptions = {
+//     method: "POST",
+//     headers: myHeaders,
+//     body: raw,
+//     redirect: "follow"
+//   };
   
-  fetch("http://localhost:3001/signin", requestOptions)
-    .then((response) => response.text())
-    .then((result) => console.log(result))
-    .catch((error) => console.error(error));
-}
+//   fetch("http://localhost:3001/signin", requestOptions)
+//     .then((response) => response.text())
+//     .then((result) => console.log(result))
+//     .catch((error) => console.error(error));
+// }
+
+
 
 

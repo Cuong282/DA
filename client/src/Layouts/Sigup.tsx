@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import "./Signup.css";
-import { LOGIN } from "../services";
+
 
 
 
@@ -18,8 +18,8 @@ function LoginForm() {
     console.log("item", item);
    
     try {
-      const ApiLogin = await fetch("http://localhost:3001/todo", {
-        method: "GET",
+      const ApiLogin = await fetch("http://localhost:3001/signup", {
+        method: "POST",
         // body: JSON.stringify(item),
         headers: {
           "Content-Type": "application/json"

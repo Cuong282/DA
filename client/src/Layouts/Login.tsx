@@ -1,56 +1,61 @@
-import { Button, Input, Modal } from "antd";
+import { Button, Input, Modal, Form } from "antd";
+import type { FormProps } from "antd";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import LoginFrom from "../services/Login";
+// import * as bcrypt from 'bcrypt';
 interface LoginResponse {
   email: string;
   password: string;
 }
+type FieldType = {
+  email?: string;
+  password?: string;
+  remember?: string;
+};
+// const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (errorInfo) => {
+//   console.log('Failed:', errorInfo);
+// };
 const LogIn = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const [data, setData] = useState<LoginResponse[] | []>([]);
+  const [User, setUser] = useState("");
 
-  let navigate = useNavigate();
+  async function handleLogin(data: any) {
+    try {
+      const saltRounds = 10;
+      // const hashedPassword = await bcrypt.hash(password, saltRounds);
+      // const loginData = { email, password: hashedPassword };
+      const dataFrom: any = await LoginFrom(data);
+      setData(data);
+      console.log("data:", dataFrom);
+    } catch (error) {
+      console.error("Error:", error);
+
+      console.log(setError);
+    }
+  }
+
   const showModal = () => {
     setIsModalOpen(true);
-  };
-useEffect(()=>{
-  if(localStorage.getItem('user-info')){
-    navigate("/danhmuc");
-  }
-},[])
-
-  async function login(event:any) {
-    // fetch("https://jsonplaceholder.typicode.com/posts").then(response => {  console.log(response.status, response.ok); });
-
-    // event.preventDefault();
-    const item = { email, password };
-   
-    const myHeaders = new Headers();
-myHeaders.append("Content-Type", "application/json");
-myHeaders.append("Cookie", "token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImN1b25nQGdtYWlsLmNvbSIsImV4cCI6MTcyMTgxMTQ1NH0.t6z5HvwPnDhEVIfGrQsalNHxpeH39pHtq4v_zDs40Gk");
-
-fetch("http://localhost:3001/todo", {
-  method: "GET",
-  // body: JSON.stringify(item),
-  headers: {
-    "Content-Type": "application/json",
-    "Accept":'application/json'
-  },
-  // mode: "no-cors",
-  
-}).then(response => {  console.log(response); });
   };
   return (
     <>
       <div>
-        <form>
-          <Modal 
-          open={isModalOpen} 
+        <Modal
+          open={isModalOpen}
           onCancel={() => setIsModalOpen(false)}
-          okText="Đăng nhập"footer={null}>
+          okText="Đăng nhập"
+          footer={null}
+        >
+          <Form
+            onFinish={function (data) {
+              handleLogin(data);
+            }}
+          >
             <div className="modal-content max-w-4xl overflow-hidden h-96 flex item-center w-full">
               <div className="modal-body text-color-primary flex item-center ">
                 <div className="pict h-full w-full">
@@ -68,61 +73,75 @@ fetch("http://localhost:3001/todo", {
                       <div className="flex items-center justify-center pb-4">
                         <h1 className="text-lg">Đăng nhập</h1>
                       </div>
-                      <p> Tên đăng nhập</p>
                       <div className="mt-2 w-full">
-                        <Input
-                          id="email"
+                        <Form.Item<FieldType>
+                          label="Email"
                           name="email"
-                          type="email"
-                          className="mb-2 w-full"
-                          onChange={(e) => setEmail(e.target.value)}
-                        />
-                      </div>
-                      <p> mật khẩu</p>
-                      <Input.Password
-                        className="mb-2"
-                        size="large"
-                        placeholder="password"
-                        onChange={(e) => setPassword(e.target.value)}
-                      />
-                      <div className="text-sm mb-6 flex justify-end">
-                        <a
-                          href="#"
-                          className="font-semibold text-red-600 hover:text-red-500 "
+                          rules={[
+                            {
+                              required: true,
+                              message: "Please input your email!",
+                            },
+                          ]}
                         >
-                          Quên mật khẩu ?
-                        </a>
+                          <Input
+                            onChange={(e) => setEmail(e.target.value)}
+                          />
+                        </Form.Item>
                       </div>
+                      <div className="mt-2 w-full">
+                      <Form.Item<FieldType>
+                        label="Password"
+                        name="password"
+                        rules={[
+                          {
+                            required: true,
+                            message: "Please input your password!",
+                          },
+                        ]}
+                      >
+                        <Input.Password
+                          onChange={(e) => setPassword(e.target.value)}
+                        />
+                      </Form.Item>
+                      </div>
+                     
                       <div className="mt-2">
-                        <div>
-                          <button
-                            type="submit"
-                            onClick={login}
+                        <Form.Item
+                          wrapperCol={{
+                            offset: 8,
+                            span: 16,
+                          }}
+                        >
+                          <Button
+                            type="primary"
+                            htmlType="submit"
                             className="flex w-full justify-center rounded-md bg-red-600 
                           px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm
                            hover:bg-red-700 focus-visible:outline focus-visible:outline-2
                             focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                           >
-                          Đăng nhập
-                          </button>
-                        </div>
+                            Submit
+                          </Button>
+                        </Form.Item>
                       </div>
+                      {error && <div className="text-red-600">{error}</div>}
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </Modal>
-          <Button
-            danger
-            size="small"
-            type="primary"
-            className="ml-2"
-            onClick={showModal}
-          >
-            Đăng nhập
-          </Button>
-        </form>
+          </Form>
+        </Modal>
+        <Button
+          danger
+          size="small"
+          type="primary"
+          className="ml-2"
+          onClick={showModal}
+        >
+          Đăng nhập
+        </Button>
       </div>
     </>
   );
