@@ -61,7 +61,7 @@ func Signup(w http.ResponseWriter, r *http.Request) {
 
 	// Check if the email is valid
 	if !strings.HasSuffix(user.Email, "@gmail.com") {
-		fmt.Println("loi~ emal")
+		fmt.Println("loi~ email")
 		http.Error(w, "Email must be a Gmail address", http.StatusBadRequest)
 		return
 	}
@@ -179,13 +179,10 @@ func Signin(w http.ResponseWriter, r *http.Request) {
 		log.Fatalf("Error happened in JSON marshal. Err: %s", err)
 	}
 	w.Write(jsonResp)
+	w.WriteHeader(http.StatusOK)
 	// w.Write([]byte("Hello, World!"))
-	// json.NewEncoder(w).Encode(creds)
+	json.NewEncoder(w).Encode(creds)
 }
-
-// type us struct {
-// 	Ok string `json:"ok"`
-// }
 
 func Welcome(w http.ResponseWriter, r *http.Request) {
 	// Lấy cookie tên "token" từ yêu cầu

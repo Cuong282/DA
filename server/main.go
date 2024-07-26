@@ -114,17 +114,6 @@ var Get1 Response
 var Get2 Response1
 
 func DoList(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("hello todo")
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusOK)
-	resp := make(map[string]string)
-	resp["message"] = "Status Created"
-	jsonResp, err := json.Marshal(resp)
-	if err != nil {
-		log.Fatalf("Error happened in JSON marshal. Err: %s", err)
-	}
-	w.Write(jsonResp)
-	return
 	url := "https://iboard-query.ssi.com.vn/stock/group/VNIndex"
 	method := "GET"
 
@@ -160,6 +149,7 @@ func DoList(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(err)
 		return
 	}
+	fmt.Println(string(body))
 	// fmt.Println(string(body))
 
 	err = json.Unmarshal([]byte(body), &Get1)

@@ -178,17 +178,7 @@ func (b *Business) CreateTodo(w http.ResponseWriter, r *http.Request) {
 		b.storage.Insert(api)
 		break
 	}
-	// reponse := &Response{
-	// 	Ok:      true,
-	// 	Message: "create todo success!",
-	// 	Status:  1,
-	// 	Data:    todo,
-	// }
-	// studentsJson, err := json.Marshal(reponse)
-	// if err != nil {
-	// 	http.Error(w, err.Error(), http.StatusInternalServerError)
-	// 	return
-	// }
+
 	w.Write([]byte("oke"))
 
 }
