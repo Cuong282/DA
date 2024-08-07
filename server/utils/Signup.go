@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"context"
 	"database/sql"
 	"encoding/json"
 	"fmt"
@@ -31,6 +32,7 @@ func init() {
 var jwtKey = []byte("secret_key")
 
 type Credentials struct {
+	Id       int    `json:"id"`
 	Email    string `json:"email"`
 	Password string `json:"password"`
 }
@@ -41,6 +43,7 @@ type Claims struct {
 }
 
 type User struct {
+	Id       int    `json:"id"`
 	Email    string `json:"email"`
 	Password string `json:"password"`
 }
@@ -66,7 +69,6 @@ func Signup(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Check if the email is already in use
 	if _, ok := users[user.Email]; ok {
 		fmt.Println("email ko ton tai")
 		http.Error(w, "Email already in use", http.StatusConflict)
@@ -79,8 +81,6 @@ func Signup(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "OK", http.StatusBadRequest)
 		return
 	}
-
-	// Hash the password
 	hash, err := bcrypt.GenerateFromPassword([]byte(user.Password), 10)
 
 	if err != nil {
@@ -90,14 +90,15 @@ func Signup(w http.ResponseWriter, r *http.Request) {
 	user.Password = string(hash)
 	fmt.Println("hash:", hash)
 
-	fmt.Println("userrrrr:", user)
+	fmt.Println("user:", user)
 	email := user.Email
 	fmt.Println("email:", email)
 	password := user.Password
 	fmt.Println("password:", password)
 
-	_, err = db.Exec("INSERT INTO user (email, password) VALUES (?,?)", user.Email, user.Password)
+	_, err = db.Exec("INSERT INTO userr (email, password) VALUES (?,?)", user.Email, user.Password)
 	if err != nil {
+		fmt.Println("err insert :", err)
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
@@ -106,7 +107,7 @@ func Signup(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "User created successfully!")
 }
 func Signin(w http.ResponseWriter, r *http.Request) {
-	fmt.Println(">>>>>>>>>>>>>>>>>>>>>>>>>>")
+
 	var creds Credentials
 	err := json.NewDecoder(r.Body).Decode(&creds)
 	if err != nil {
@@ -116,8 +117,11 @@ func Signin(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("api signIn decode creds: %s\n", logger.JSONDebugDataString(creds))
 
 	var userEmail string
-	err = db.QueryRow("SELECT email FROM user WHERE email =?", creds.Email).Scan(&userEmail)
+	// var password string
+	var user User
+	err = db.QueryRowxContext(context.Background(), "SELECT id, email, password FROM userr WHERE Email = ?", creds.Email).StructScan(&user)
 	if err != nil {
+		fmt.Println("errdb11:", err)
 		if err == sql.ErrNoRows {
 			http.Error(w, "Invalid email or password", http.StatusUnauthorized)
 			return
@@ -126,26 +130,9 @@ func Signin(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	fmt.Printf("api signIn userEmail: %s\n", userEmail)
-
-	if userEmail == creds.Email {
-		var user User
-		err = db.QueryRow("SELECT password FROM user WHERE email =?", creds.Email).Scan(&user.Password)
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
-		}
-		fmt.Printf("api signIn user: %s\n", logger.JSONDebugDataString(user))
-
-		err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(creds.Password))
-		if err != nil {
-			if err == bcrypt.ErrMismatchedHashAndPassword {
-				http.Error(w, "Invalid email or password", http.StatusUnauthorized)
-				return
-			}
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
-		}
-	}
+	// fmt.Println("userEmail:", userEmail)
+	// fmt.Println("password:", password)
+	fmt.Println("user get from db:", user)
 
 	expirationTime := time.Now().Add(1 * time.Minute)
 	claims := &Claims{
@@ -160,7 +147,7 @@ func Signin(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	fmt.Printf("api signIn succes token: %s\n", tokenString)
+	// fmt.Printf("api signIn succes token: %s\n", tokenString)
 
 	w.Header().Set("Content-Type", "application/json")
 	http.SetCookie(w, &http.Cookie{

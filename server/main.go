@@ -149,12 +149,12 @@ func DoList(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(err)
 		return
 	}
-	fmt.Println(string(body))
+	// fmt.Println(string(body))
 	// fmt.Println(string(body))
 
 	err = json.Unmarshal([]byte(body), &Get1)
 	fmt.Println(err)
-	fmt.Println(Get1)
+	// fmt.Println(Get1)
 	json.NewEncoder(w).Encode(Get1)
 
 }
@@ -210,7 +210,7 @@ func main() {
 	router.HandleFunc("/GroupList", biz.GetGroupList).Methods("POST")
 	router.HandleFunc("/GetListAPI", biz.GetGroupList).Methods("GET")
 	router.HandleFunc("/GroupList", biz.GetGroupList).Methods("GET")
-	router.HandleFunc("/newTodo", biz.CreateTodo).Methods("POST")
+	router.HandleFunc("/newTodo ", biz.CreateTodo).Methods("POST")
 
 	router.HandleFunc("/signup", utils.Signup).Methods("POST")
 	router.HandleFunc("/signin", utils.Signin).Methods("POST")

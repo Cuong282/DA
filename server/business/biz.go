@@ -65,7 +65,7 @@ func (b *Business) GetGroupList(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(err)
 		return
 	}
-	fmt.Println(string(body))
+	// fmt.Println(string(body))
 	err = json.Unmarshal([]byte(body), &Get2)
 	fmt.Println(err)
 
@@ -183,6 +183,6 @@ func (b *Business) CreateTodo(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func GetListAPI(w http.ResponseWriter, r *http.Request) {
-	json.NewEncoder(w).Encode(Get2)
-}
+// func GetListAPI(w http.ResponseWriter, r *http.Request) {
+// 	json.NewEncoder(w).Encode(Get2)
+// }
