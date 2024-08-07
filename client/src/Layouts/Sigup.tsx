@@ -6,41 +6,42 @@ import "./Signup.css";
 
 
 
-function LoginForm() {
+function SignupForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
-  async function LogIn(event:any) {
+  async function Signup(event:any) {
     event.preventDefault(); 
     let item = { email, password };
     console.log("item", item);
    
     try {
-      const ApiLogin = await fetch("http://localhost:3001/signup", {
+      const Signup = await fetch("http://localhost:3001/signup", {
         method: "POST",
-        // body: JSON.stringify(item),
+        body: JSON.stringify(item),
         headers: {
           "Content-Type": "application/json"
         },
          mode: "no-cors"
       });
 
-      const result = await ApiLogin.json();
+      const result = await Signup.json();
+      console.log("signup:",Signup)
       console.log("result:", result);
       localStorage.setItem("user-info",JSON.stringify(result))
      
       if (result.error) {
         setError(result.error);
       } else {
-        console.log("Login successful!");
+        console.log("Signup successful!");
       }
     } catch (error) {
-      setError("Error logging in. Please try again:");
+      setError("");
     }
-    navigate("/", { replace: true });
-    console.log("Login successful!");
+    navigate("/signup", { replace: false });
+    console.log (alert("Signup susses"));
   }
 
   return (
@@ -73,9 +74,9 @@ function LoginForm() {
         {error && <div style={{ color: "red" }}>{error}</div>}
       </div>
 
-      <button onClick={LogIn} className="bg-sky-400 rounded-md h-full">Đăng Ký</button>
+      <button onClick={Signup} className="bg-sky-400 rounded-md h-full">Đăng Ký</button>
     </form>
   );
 };
 
-export default LoginForm;
+export default SignupForm;

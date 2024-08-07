@@ -1,0 +1,15 @@
+.ant-drawer-title{
+    color: var(--color-theme-text-primary) !important;
+  
+}
+.ant-drawer-close{
+    color: var(--color-theme-text-primary) !important;
+  
+}
+.ant-drawer-header{
+    background-color: var(--color-theme-secondary);
+}
+
+.ant-drawer-body{
+    background-color: var(--color-theme-secondary);
+}

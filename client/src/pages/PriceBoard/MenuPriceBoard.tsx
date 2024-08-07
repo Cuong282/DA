@@ -6,6 +6,7 @@ import { HiOutlineSearch } from "react-icons/hi";
 import { AiTwotoneSetting } from "react-icons/ai";
 import { MoreOutlined, ArrowUpOutlined, PlusOutlined } from "@ant-design/icons";
 import listItemBoard from "../../IndexItem/IndexItem";
+import SetBuy from "./setcommant";
 
 interface getMenus {
   active: number;
@@ -15,7 +16,7 @@ interface getMenus {
 // const [button,setButton]= useState("");
 const GetMenus = ({ active, setActive }: getMenus) => {
   const navigate = useNavigate();
- 
+
   return (
     <>
       {listItemBoard.map((item, index) => (
@@ -49,7 +50,7 @@ const GetMenus = ({ active, setActive }: getMenus) => {
                           placeholder="tạo danh mục mới"
                           className=" w-64 h-1.5 p-4 ps-10 text-sm rounded focus:border-blue-500 bg-theme-input-background"
                         />
-                        <PlusOutlined  className="text-theme-text-tertiary border-none h-5 w-5 ml-3" />
+                        <PlusOutlined className="text-theme-text-tertiary border-none h-5 w-5 ml-3" />
                       </div>
                     ) : (
                       e.name
@@ -158,13 +159,7 @@ const Menu = () => {
               </li>
               <MoreOutlined className="text-lg" />
               <li className="px-2 py-1">
-                <Button
-                  // type="ghost"
-                  size="small"
-                  className="bg-theme-buy text-theme-text-invert w-28"
-                >
-                  Đặt lệnh
-                </Button>
+                <SetBuy />
               </li>
             </ul>
           </div>

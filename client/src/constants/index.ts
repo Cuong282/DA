@@ -48,73 +48,73 @@ export const listMenus = [
         path: "/theodoi",
      
     },
-    {
-        name: "GIAO DỊCH CƠ SỞ",
-        path: "",
-        childrent: [
-            {
-                name: "ĐẶT LỆNH CƠ SỞ",
-                path: "/dat-lenh-co-so",
-            },
-            {
-                name: "ĐẶT LỆNH PHÁI SINH",
-                path: "/dat-lenh-phai-sinh",
-            },
-            {
-                name: "LỆNH ĐIỀU KIỆN",
-                path: "/lenh-dieu-kien",
-            },
-            {
-                name: "CHUYỂN CHỨNG KHOÁN",
-                path: "/chuyen-chung-khoan",
-            },
-            {
-                name: "IPO CHÍNH QUYỀN",
-                path: "/ipo-chinh-quyen",
-            },
-            {
-                name: "XÁC NHẬN LỆNH",
-                path: "/giao-dich-chung-khoan",
-            },
-            {
-                name: "THÔNG TIN QUYỀN",
-                path: "/thong-tin-quyen",
-            },
-        ],
-    },
-    {
-        name: "GIAO DỊCH PHÁI SINH",
-        childrent: [
-            {
-                name: "ĐẶT LỆNH CƠ SỞ",
-                path: "/dat-lenh-co-so",
-            },
-            {
-                name: "ĐẶT LỆNH PHÁI SINH",
-                path: "/dat-lenh-phai-sinh",
-            },
-            {
-                name: "LỆNH ĐIỀU KIỆN",
-                path: "/lenh-dieu-kien",
-            },
-            {
-                name: "CHUYỂN CHỨNG KHOÁN",
-                path: "/chuyen-chung-khoan",
-            },
-            {
-                name: "IPO CHÍNH QUYỀN",
-                path: "/ipo-chinh-quyen",
-            },
-            {
-                name: "XÁC NHẬN LỆNH",
-                path: "/giao-dich-chung-khoan",
-            },
-            {
-                name: "THÔNG TIN QUYỀN",
-                path: "/thong-tin-quyen",
-            },
-        ],
-    },
+    // {
+    //     name: "GIAO DỊCH CƠ SỞ",
+    //     path: "",
+    //     childrent: [
+    //         {
+    //             name: "ĐẶT LỆNH CƠ SỞ",
+    //             path: "/dat-lenh-co-so",
+    //         },
+    //         {
+    //             name: "ĐẶT LỆNH PHÁI SINH",
+    //             path: "/dat-lenh-phai-sinh",
+    //         },
+    //         {
+    //             name: "LỆNH ĐIỀU KIỆN",
+    //             path: "/lenh-dieu-kien",
+    //         },
+    //         {
+    //             name: "CHUYỂN CHỨNG KHOÁN",
+    //             path: "/chuyen-chung-khoan",
+    //         },
+    //         {
+    //             name: "IPO CHÍNH QUYỀN",
+    //             path: "/ipo-chinh-quyen",
+    //         },
+    //         {
+    //             name: "XÁC NHẬN LỆNH",
+    //             path: "/giao-dich-chung-khoan",
+    //         },
+    //         {
+    //             name: "THÔNG TIN QUYỀN",
+    //             path: "/thong-tin-quyen",
+    //         },
+    //     ],
+    // },
+    // {
+    //     name: "GIAO DỊCH PHÁI SINH",
+    //     childrent: [
+    //         {
+    //             name: "ĐẶT LỆNH CƠ SỞ",
+    //             path: "/dat-lenh-co-so",
+    //         },
+    //         {
+    //             name: "ĐẶT LỆNH PHÁI SINH",
+    //             path: "/dat-lenh-phai-sinh",
+    //         },
+    //         {
+    //             name: "LỆNH ĐIỀU KIỆN",
+    //             path: "/lenh-dieu-kien",
+    //         },
+    //         {
+    //             name: "CHUYỂN CHỨNG KHOÁN",
+    //             path: "/chuyen-chung-khoan",
+    //         },
+    //         {
+    //             name: "IPO CHÍNH QUYỀN",
+    //             path: "/ipo-chinh-quyen",
+    //         },
+    //         {
+    //             name: "XÁC NHẬN LỆNH",
+    //             path: "/giao-dich-chung-khoan",
+    //         },
+    //         {
+    //             name: "THÔNG TIN QUYỀN",
+    //             path: "/thong-tin-quyen",
+    //         },
+    //     ],
+    // },
     {
         name: "GIAO DỊCH TIỀN",
         childrent: [

@@ -44,7 +44,7 @@ const Header = () => {
         Giao dịch giả lập
       </Button>
 
-      <Link to="/sigup">
+      <Link to="/signup">
         <Button
           size="small"
           className="ml-2 bg-theme-neutral text-theme-text-tertiary"

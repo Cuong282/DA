@@ -1,18 +1,19 @@
 
-async function LoginFrom(dataUser) {
+async function SignupFrom(data) {
   const requestOptions = {
     method: "POST",
     redirect: "follow",
     body: JSON.stringify(
-      dataUser
+      data
     ),
   };
   try {
     const response = await fetch(
-      "http://localhost:3001/signin",
+      "http://localhost:3001/signup",
       requestOptions
     );
-    const result1 = await response.text();
+    console.log("response:",response)
+    const result1 = await response.json();
     console.log("111111111111:", result1);
     return result1;
   } catch (error) {
@@ -20,5 +21,5 @@ async function LoginFrom(dataUser) {
     throw error;
   }
 }
-export default LoginFrom;
-console.log(">>>>>>>>>>>>>>>>>", LoginFrom());
+export default SignupFrom;
+console.log(">11111111");

@@ -1,17 +1,12 @@
-import React from "react";
-import {
-  FundOutlined,
-} from "@ant-design/icons";
+import React, { useState } from "react";
+import { FundOutlined } from "@ant-design/icons";
 import type { MenuProps } from "antd";
-import { Breadcrumb, Layout, Menu, theme } from "antd";
+import { Breadcrumb, Button, Drawer, Layout, Menu, theme } from "antd";
 import News from "./News";
 
-const {  Content, Footer, Sider } = Layout;
+const { Content, Footer, Sider } = Layout;
 
-const items2: MenuProps["items"] = [
-  FundOutlined,
-
-].map((icon, index) => {
+const items2: MenuProps["items"] = [FundOutlined].map((icon, index) => {
   const key = String(index + 1);
 
   return {
@@ -29,41 +24,43 @@ const items2: MenuProps["items"] = [
   };
 });
 const Nopage = () => {
+
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
   return (
     <>
-      <Layout>
-        <Content style={{ padding: "0 48px", height: "100%" }}>
-          <Breadcrumb style={{ margin: "20px 0" }}>
-          </Breadcrumb>
-          <Layout
-            style={{
-              padding: "24px 0",
-              background: colorBgContainer,
-              borderRadius: borderRadiusLG,
-            }}
-          >
-            <Sider style={{ background: colorBgContainer }} width={200}>
-              <Menu
-                mode="inline"
-                defaultSelectedKeys={["1"]}
-                defaultOpenKeys={["sub1"]}
-                style={{ height: "100%" }}
-                items={items2}
-              />
-            </Sider>
 
-            <Content style={{ padding: "0 24px", height: "100%" }}>
-              <News />
-            </Content>
-          </Layout>
-        </Content>
-        <Footer style={{ textAlign: "center" }}>
-            <h1>thị trường</h1>
+      <Content style={{ padding: "0 48px", height: "100%" }}>
+        <Breadcrumb style={{ margin: "20px 0" }}></Breadcrumb>
+        <Layout
+          style={{
+            background: colorBgContainer,
+            borderRadius: borderRadiusLG,
+            backgroundColor: "var(--color-theme-secondary)",
+          }}
+        >
+          <Sider style={{ background: colorBgContainer }} width={200}>
+            <Menu
+              mode="inline"
+              defaultSelectedKeys={["1"]}
+              defaultOpenKeys={["sub1"]}
+              style={{
+                height: "100%",
+                backgroundColor: "var(--color-theme-price-table-col-highlight)",
+              }}
+              items={items2}
+            />
+          </Sider>
+
+          <Content style={{ padding: "0 24px", height: "100%" }}>
+            <News />
+          </Content>
+        </Layout>
+        <Footer style={{ textAlign: "center", marginTop:"100px" }}>
+          <h1>thị trường</h1>
         </Footer>
-      </Layout>
+      </Content>
     </>
   );
 };

@@ -26,7 +26,7 @@ const App = () => {
           <Route path="/danhmuc" element={<Nopage />} />
           <Route path="/theodoi" element={<IndexList />} />
           {/* <Route path="/sigup" element={<Sigup/>} /> */}
-          <Route path="/sigup" element={<LoginForm />} />
+          <Route path="/signup" element={<LoginForm />} />
         </Route>
       </Routes>
     </BrowserRouter>

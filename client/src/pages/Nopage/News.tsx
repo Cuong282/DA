@@ -17,7 +17,7 @@ const News = () => {
     },
     series: [
       {
-        data: [1, 2, 3, 2, 4, 2, 3, 5,12,3,5,5,12,15,1,5,33 ,1,12,4,12,4,5,20,7,2,6,8,16,12],
+        data: [1, 2, 3, 2, 4, 2, 3, 5,12,3,5,5,12,15,1,5,20 ,1,12,4,12,4,5,20,7,2,6, 3, 2, 4, 2, 3, 5,12,3,5,5,12,15,1,5,20 ,1,12,4,12,4,5,20,7,8,16,12, 3, 5,12,3,5,5,12,15,1,5,20 ,1,12,4,12,4,5,20,7,2,6,5,20,7,2,6,8,16,2,3,5,5,12,15,1,5,20 ,1,12,4,12,4,5,20,7,2,6,5,20,7,2,6,12, 3, 5,12,3,5,5,12],
       },
     ],
     legend: {
@@ -70,9 +70,9 @@ const News = () => {
   }, []);
 
   return (
-    <section className="w-full h-full">
-            <div className="w-full p-3" >
-              <div className="w-full h-full bg-theme-secondary " >
+    <section className="w-full h-full bg-theme-secondary ">
+            <div className="w-full p-3 " >
+              <div className="w-full h-full " >
                 <HighchartsReact
                   highcharts={Highcharts}
                    options={chartOptions}

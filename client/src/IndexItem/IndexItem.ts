@@ -86,14 +86,14 @@ export const listItemBoard = [
             },
         ],
     },
-    {
-        name: "UPCOM",
-        path: "",
-    },
-    {
-        name: "Trái phiếu riêng lẻ",
-        path: "",
-    },
+    // {
+    //     name: "UPCOM",
+    //     path: "",
+    // },
+    // {
+    //     name: "Trái phiếu riêng lẻ",
+    //     path: "",
+    // },
     {
         name: "CP Ngành",
         path: "",
@@ -128,74 +128,74 @@ export const listItemBoard = [
             },
         ],
     },
-    {
-        name: "Thỏa thuận",
-        path: "",
-        childrent: [
-            {
-                name: "ĐẶT LỆNH CƠ SỞ",
-                path: "/dat-lenh-co-so",
-            },
-            {
-                name: "ĐẶT LỆNH PHÁI SINH",
-                path: "/dat-lenh-phai-sinh",
-            },
-            {
-                name: "LỆNH ĐIỀU KIỆN",
-                path: "/lenh-dieu-kien",
-            },
-            {
-                name: "CHUYỂN CHỨNG KHOÁN",
-                path: "/chuyen-chung-khoan",
-            },
-            {
-                name: "IPO CHÍNH QUYỀN",
-                path: "/ipo-chinh-quyen",
-            },
-            {
-                name: "XÁC NHẬN LỆNH",
-                path: "/giao-dich-chung-khoan",
-            },
-            {
-                name: "THÔNG TIN QUYỀN",
-                path: "/thong-tin-quyen",
-            },
-        ],
-    },
-    {
-        name: "Phái sinh",
-        path: "",
-        childrent: [
-            {
-                name: "ĐẶT LỆNH CƠ SỞ",
-                path: "/dat-lenh-co-so",
-            },
-            {
-                name: "ĐẶT LỆNH PHÁI SINH",
-                path: "/dat-lenh-phai-sinh",
-            },
-            {
-                name: "LỆNH ĐIỀU KIỆN",
-                path: "/lenh-dieu-kien",
-            },
-            {
-                name: "CHUYỂN CHỨNG KHOÁN",
-                path: "/chuyen-chung-khoan",
-            },
-            {
-                name: "IPO CHÍNH QUYỀN",
-                path: "/ipo-chinh-quyen",
-            },
-            {
-                name: "XÁC NHẬN LỆNH",
-                path: "/giao-dich-chung-khoan",
-            },
-            {
-                name: "THÔNG TIN QUYỀN",
-                path: "/thong-tin-quyen",
-            },
-        ],
-    },
+    // {
+    //     name: "Thỏa thuận",
+    //     path: "",
+    //     childrent: [
+    //         {
+    //             name: "ĐẶT LỆNH CƠ SỞ",
+    //             path: "/dat-lenh-co-so",
+    //         },
+    //         {
+    //             name: "ĐẶT LỆNH PHÁI SINH",
+    //             path: "/dat-lenh-phai-sinh",
+    //         },
+    //         {
+    //             name: "LỆNH ĐIỀU KIỆN",
+    //             path: "/lenh-dieu-kien",
+    //         },
+    //         {
+    //             name: "CHUYỂN CHỨNG KHOÁN",
+    //             path: "/chuyen-chung-khoan",
+    //         },
+    //         {
+    //             name: "IPO CHÍNH QUYỀN",
+    //             path: "/ipo-chinh-quyen",
+    //         },
+    //         {
+    //             name: "XÁC NHẬN LỆNH",
+    //             path: "/giao-dich-chung-khoan",
+    //         },
+    //         {
+    //             name: "THÔNG TIN QUYỀN",
+    //             path: "/thong-tin-quyen",
+    //         },
+    //     ],
+    // },
+    // {
+    //     name: "Phái sinh",
+    //     path: "",
+    //     childrent: [
+    //         {
+    //             name: "ĐẶT LỆNH CƠ SỞ",
+    //             path: "/dat-lenh-co-so",
+    //         },
+    //         {
+    //             name: "ĐẶT LỆNH PHÁI SINH",
+    //             path: "/dat-lenh-phai-sinh",
+    //         },
+    //         {
+    //             name: "LỆNH ĐIỀU KIỆN",
+    //             path: "/lenh-dieu-kien",
+    //         },
+    //         {
+    //             name: "CHUYỂN CHỨNG KHOÁN",
+    //             path: "/chuyen-chung-khoan",
+    //         },
+    //         {
+    //             name: "IPO CHÍNH QUYỀN",
+    //             path: "/ipo-chinh-quyen",
+    //         },
+    //         {
+    //             name: "XÁC NHẬN LỆNH",
+    //             path: "/giao-dich-chung-khoan",
+    //         },
+    //         {
+    //             name: "THÔNG TIN QUYỀN",
+    //             path: "/thong-tin-quyen",
+    //         },
+    //     ],
+    // },
     {
         name: "chứng quyền",
         path: "",

@@ -1,9 +1,4 @@
 import "./BoxChart.css";
-
-
-import HighchartsReact from "highcharts-react-official";
-import Highcharts from "highcharts";
-import { configChartIndex } from "../../untils/bindDataHighcharts";
 import {
   ArrowDownOutlined,
   ArrowUpOutlined,

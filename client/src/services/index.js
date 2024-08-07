@@ -34,31 +34,12 @@ export async function ListApi() {
   } catch (error) {
     console.error("Error:", error);
     throw error;
+    
   }
 }
 
-// export async function LOGIN(){
 
-//   const myHeaders = new Headers();
-//   myHeaders.append("Content-Type", "application/json");
-  
-//   const raw = JSON.stringify({
-//     "email": "cuong@gmail.com",
-//     "password": "1234567"
-//   });
-  
-//   const requestOptions = {
-//     method: "POST",
-//     headers: myHeaders,
-//     body: raw,
-//     redirect: "follow"
-//   };
-  
-//   fetch("http://localhost:3001/signin", requestOptions)
-//     .then((response) => response.text())
-//     .then((result) => console.log(result))
-//     .catch((error) => console.error(error));
-// }
+
 
 
 

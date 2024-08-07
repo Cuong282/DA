@@ -1,9 +1,7 @@
 import { Button, Input, Modal, Form } from "antd";
 import type { FormProps } from "antd";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import LoginFrom from "../services/Login";
-// import * as bcrypt from 'bcrypt';
 interface LoginResponse {
   email: string;
   password: string;
@@ -11,11 +9,13 @@ interface LoginResponse {
 type FieldType = {
   email?: string;
   password?: string;
-  remember?: string;
 };
-// const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (errorInfo) => {
-//   console.log('Failed:', errorInfo);
-// };
+const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
+  console.log('Success:', values);
+};
+const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (errorInfo) => {
+  console.log('Failed:', errorInfo);
+};
 const LogIn = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [email, setEmail] = useState("");
@@ -23,12 +23,9 @@ const LogIn = () => {
   const [error, setError] = useState<string | null>(null);
   const [data, setData] = useState<LoginResponse[] | []>([]);
   const [User, setUser] = useState("");
-
+  
   async function handleLogin(data: any) {
     try {
-      const saltRounds = 10;
-      // const hashedPassword = await bcrypt.hash(password, saltRounds);
-      // const loginData = { email, password: hashedPassword };
       const dataFrom: any = await LoginFrom(data);
       setData(data);
       console.log("data:", dataFrom);
@@ -39,6 +36,7 @@ const LogIn = () => {
     }
   }
 
+  
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -52,6 +50,8 @@ const LogIn = () => {
           footer={null}
         >
           <Form
+         
+            onFinishFailed={onFinishFailed}
             onFinish={function (data) {
               handleLogin(data);
             }}
@@ -68,12 +68,12 @@ const LogIn = () => {
                   </div>
                 </div>
                 <div className=" flex items-center w-full ">
-                  <div className="w-full h-full p-6">
-                    <div className=" object-cover inset-1  w-full h-full">
+                  <div className="w-full h-full pt-14">
+                    {/* <div className=" object-cover inset-1  w-full h-full"> */}
                       <div className="flex items-center justify-center pb-4">
                         <h1 className="text-lg">Đăng nhập</h1>
                       </div>
-                      <div className="mt-2 w-full">
+                      <div className="mt-2">
                         <Form.Item<FieldType>
                           label="Email"
                           name="email"
@@ -89,7 +89,7 @@ const LogIn = () => {
                           />
                         </Form.Item>
                       </div>
-                      <div className="mt-2 w-full">
+                      <div className="mt-2 flex items-center ">
                       <Form.Item<FieldType>
                         label="Password"
                         name="password"
@@ -100,13 +100,17 @@ const LogIn = () => {
                           },
                         ]}
                       >
+                        <div>
                         <Input.Password
+                        className="p-2"
                           onChange={(e) => setPassword(e.target.value)}
                         />
+                        </div>
+                       
                       </Form.Item>
                       </div>
                      
-                      <div className="mt-2">
+                      <div className="">
                         <Form.Item
                           wrapperCol={{
                             offset: 8,
@@ -116,8 +120,8 @@ const LogIn = () => {
                           <Button
                             type="primary"
                             htmlType="submit"
-                            className="flex w-full justify-center rounded-md bg-red-600 
-                          px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm
+                            className="flex items-center w-full justify-center rounded-md bg-red-600 
+                          text-sm font-semibold leading-6 text-white shadow-sm
                            hover:bg-red-700 focus-visible:outline focus-visible:outline-2
                             focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                           >
@@ -128,7 +132,7 @@ const LogIn = () => {
                       {error && <div className="text-red-600">{error}</div>}
                     </div>
                   </div>
-                </div>
+                {/* </div> */}
               </div>
             </div>
           </Form>
