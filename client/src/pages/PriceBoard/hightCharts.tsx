@@ -10,7 +10,7 @@ const HightCharts = () => {
   return (
     <>
       <div className="highcharts-background relative" style={{ height: 105 }}>
-        <div className=" w-full h-[85px] bg-theme-primary">
+        <div className="h-full w-full h-[85px] bg-theme-primary">
           <div className="">
             {
               <LineChart
