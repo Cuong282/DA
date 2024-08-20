@@ -13,3 +13,10 @@
 .ant-drawer-body{
     background-color: var(--color-theme-secondary);
 }
+
+.ant-select-selector{
+    background-color: var(--color-theme-price-table-header) !important;
+
+}
+
+

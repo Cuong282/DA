@@ -5,6 +5,7 @@ import {
   Dropdown,
   Input,
   MenuProps,
+  Select,
   Space,
   Tooltip,
 } from "antd";
@@ -27,6 +28,7 @@ const SetBuy: React.FC = () => {
   const onClose = () => {
     setOpen(false);
   };
+
 
   const items: MenuProps["items"] = [
     {
@@ -94,14 +96,19 @@ const SetBuy: React.FC = () => {
           <div className="flex items-center justify-between space-x-2">
             <p>tài khoản đặt lệnh</p>
 
-            <Input className="size-2/4 bg-white" placeholder="Filled" variant="filled" />
-            <Dropdown menu={{ items }} trigger={["click"]} className="text-theme-text-up">
-              <a onClick={(e) => e.preventDefault()}>
-                <Space>
-                  <DownOutlined />
-                </Space>
-              </a>
-            </Dropdown>
+
+            <Select
+              showSearch
+              placeholder="Select a person"
+              filterOption={(input, option) =>
+                (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+              }
+              options={[
+                { value: '1', label: 'Jack' },
+                { value: '2', label: 'Lucy' },
+                { value: '3', label: 'Tom' },
+              ]}
+            />
           </div>
           <div className="flex items-center justify-around mt-8">
             <p>KL mua </p>
@@ -111,7 +118,7 @@ const SetBuy: React.FC = () => {
           <div className="flex items-center justify-around mt-8">
             <p>Khối Lượng</p>
             <div className=" input-group">
-              
+
               <div className="cursor-pointer text-theme-text-down hover:bg-tertiary hover:text-color-highlight icon left-icon"></div>
               <Input
                 placeholder="Enter your username"
@@ -128,7 +135,7 @@ const SetBuy: React.FC = () => {
           <div className="flex items-center justify-around mt-8">
             <p>Giá (x1000)</p>
             <div className=" input-group">
-              
+
               <div className="cursor-pointer text-theme-text-down hover:bg-tertiary hover:text-color-highlight icon left-icon"></div>
               <Input
                 placeholder="Enter your username"
@@ -143,8 +150,8 @@ const SetBuy: React.FC = () => {
           </div>
 
           <div className="flex items-center justify-around mt-10">
-          <Button className="border-current bg-green-600" type="primary">Mua</Button>
-          <Button className="border-current bg-red-600" type="primary">Bán</Button>
+            <Button className="border-current bg-green-600" type="primary">Mua</Button>
+            <Button className="border-current bg-red-600" type="primary">Bán</Button>
           </div>
         </div>
       </Drawer>

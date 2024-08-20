@@ -3,6 +3,8 @@ import { FundOutlined } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Breadcrumb, Button, Drawer, Layout, Menu, theme } from "antd";
 import News from "./News";
+import "./index.css"
+import { color } from "highcharts";
 
 const { Content, Footer, Sider } = Layout;
 
@@ -14,11 +16,12 @@ const items2: MenuProps["items"] = [FundOutlined].map((icon, index) => {
     icon: React.createElement(icon),
     label: `chỉ số ${key}`,
 
-    children: new Array(2).fill(null).map((_, j) => {
+    children: new Array(5).fill(null).map((_, j) => {
       const subKey = index * 5 + j + 1;
       return {
         key: subKey,
         label: `mã CK${subKey}`,
+       
       };
     }),
   };
@@ -31,7 +34,7 @@ const Nopage = () => {
   return (
     <>
 
-      <Content style={{ padding: "0 48px", height: "100%" }}>
+      <Content style={{ padding: "0 48px", height: "100%", color:"white" }}>
         <Breadcrumb style={{ margin: "20px 0" }}></Breadcrumb>
         <Layout
           style={{
@@ -57,10 +60,12 @@ const Nopage = () => {
             <News />
           </Content>
         </Layout>
-        <Footer style={{ textAlign: "center", marginTop:"100px" }}>
+        <Footer style={{ textAlign: "center", marginTop: "100px" }}>
           <h1>thị trường</h1>
         </Footer>
       </Content>
+
+
     </>
   );
 };

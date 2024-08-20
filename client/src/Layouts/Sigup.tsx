@@ -3,9 +3,6 @@ import { useNavigate } from "react-router-dom";
 
 import "./Signup.css";
 
-
-
-
 function SignupForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -45,7 +42,7 @@ function SignupForm() {
   }
 
   return (
-    <form>
+    <form className="flex items-center mt-20">
       <h2>Sign up</h2>
       <div className="Signup_from ">
         <br />

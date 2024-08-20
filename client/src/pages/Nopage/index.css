@@ -1,0 +1,7 @@
+.ant-menu-submenu-title{
+    color: var(--color-theme-text-tertiary) !important;
+}
+
+li{
+    color: brown !important;
+}

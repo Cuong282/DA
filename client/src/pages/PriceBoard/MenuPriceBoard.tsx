@@ -1,12 +1,13 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { BiChevronDown, BiChevronUp } from "react-icons/bi";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Button, Input, Popover, Select, Switch } from "antd";
+import { Button, Input, Popover, Select, SelectProps, Switch } from "antd";
 import { HiOutlineSearch } from "react-icons/hi";
 import { AiTwotoneSetting } from "react-icons/ai";
 import { MoreOutlined, ArrowUpOutlined, PlusOutlined } from "@ant-design/icons";
 import listItemBoard from "../../IndexItem/IndexItem";
 import SetBuy from "./setcommant";
+import "./setcommant.css";
 
 interface getMenus {
   active: number;
@@ -87,6 +88,39 @@ const volumeOptions = [
 const onChange = (checked: boolean) => {
   console.log(`switch to ${checked}`);
 };
+
+const options: SelectProps['options'] = [];
+
+for (let i = 1; i < 2; i++) {
+  options.push(
+    {
+      value: 'ACB',
+      label: 'ACB',
+    },{
+      value: 'VCB',
+      label: 'VCB',
+    },{
+      value: 'MBB',
+      label: 'MBB',
+    },{
+      value: 'VPB',
+      label: 'VPB',
+    },{
+      value: 'BIDV',
+      label: 'BIDV',
+    },{
+      value: 'FLC',
+      label: 'FLC',
+    },{
+      value: 'HPG',
+      label: 'HPG',
+    }
+  );
+}
+
+const handleChange = (value: string) => {
+  console.log(`selected ${value}`);
+};
 const Menu = () => {
   const [active, setActive] = useState<number>(-1);
   const [unitVolume, setUnitVolume] = React.useState<number>(1);
@@ -95,13 +129,12 @@ const Menu = () => {
     <>
       <div className="flex justify-between bg-theme-table-row-odd text-theme-text-tertiary w-full">
         <div className="flex justify-between align-middle w-full items-center bg-theme-table-row-odd ">
-          <Input
-            size="small"
-            className="bg-theme-input-background w-72 mr-1 "
-            addonBefore={
-              <HiOutlineSearch className="text-theme-text-tertiary border-none" />
-            }
-            placeholder="Tìm kiếm CK"
+          <Select
+            mode="tags"
+            style={{ width: '20%', color: "#000"}}
+            placeholder="search ck"
+            onChange={handleChange}
+            options={options}
           />
           <div className="flex w-full justify-between">
             <li className="flex hover">

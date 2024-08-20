@@ -135,3 +135,7 @@
 .highcharts-data-table tr:hover {
     background: #f1f7ff;
 }
+
+.ant-select-selector{
+    background-color: #d61e1e;
+}
