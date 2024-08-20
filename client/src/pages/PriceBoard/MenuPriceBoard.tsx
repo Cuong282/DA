@@ -130,7 +130,7 @@ const Menu = () => {
                         />
                       </div>
                       <div className="flex items-center justify-between mb-2">
-                        <p>Đơn vị Giá trị</p>
+                        <p>Đơn vị Giá trị...</p>
                         <Select
                           style={{ width: 120 }}
                           value={unitValue}
