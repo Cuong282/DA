@@ -128,10 +128,10 @@ const Menu = () => {
   return (
     <>
       <div className="flex justify-between bg-theme-table-row-odd text-theme-text-tertiary w-full">
-        <div className="flex justify-between align-middle w-full items-center bg-theme-table-row-odd ">
+        <div className="flex justify-between align-middle w-full items-center bg-theme-table-row-odd text-white ">
           <Select
             mode="tags"
-            style={{ width: '20%', color: "#000"}}
+            style={{ width: '20%', color: "#red"}}
             placeholder="search ck"
             onChange={handleChange}
             options={options}
