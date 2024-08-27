@@ -2,6 +2,7 @@ package utils
 
 import (
 	"context"
+	"da_server/logger"
 	"database/sql"
 	"encoding/json"
 	"fmt"
@@ -10,8 +11,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/akhilsharma/todo/logger"
-	_ "github.com/go-sql-driver/mysql"
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/jmoiron/sqlx"
 	"golang.org/x/crypto/bcrypt"
@@ -117,7 +116,6 @@ func Signin(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("api signIn decode creds: %s\n", logger.JSONDebugDataString(creds))
 
 	var userEmail string
-	// var password string
 	var user User
 	err = db.QueryRowxContext(context.Background(), "SELECT id, email, password FROM userr WHERE Email = ?", creds.Email).StructScan(&user)
 	if err != nil {
@@ -130,8 +128,6 @@ func Signin(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	fmt.Printf("api signIn userEmail: %s\n", userEmail)
-	// fmt.Println("userEmail:", userEmail)
-	// fmt.Println("password:", password)
 	fmt.Println("user get from db:", user)
 
 	expirationTime := time.Now().Add(1 * time.Minute)
