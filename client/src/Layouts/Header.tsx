@@ -1,4 +1,4 @@
-import { Popover, Button, Modal, Input } from "antd";
+import { Popover, Button, Modal, Input, Badge } from "antd";
 import { useState, useEffect, useRef } from "react";
 import { ITheme } from "../interfaces/interfaces";
 import { renderIconTheam, renderMenuTheme } from "../commons/menutheme";
@@ -27,7 +27,9 @@ const Header = () => {
       <SlideFade />
       <Time />
       <div className="notify flex items-center text-theme-text-tertiary">
-        <BellOutlined style={{ marginLeft: "10px" }} />
+        <Badge count={99}>
+          <BellOutlined style={{ marginLeft: "10px", color:"white",width:"25px"}} />
+        </Badge>
         <Popover
           placement="bottom"
           content={renderMenuTheme(state, setState)}
