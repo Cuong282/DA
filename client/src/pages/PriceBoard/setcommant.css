@@ -16,6 +16,7 @@
 
 .ant-select-selector{
     background-color: var(--color-theme-price-table-header) !important;
+    color: var(--color-theme-text-primary) !important;
 
 }
 

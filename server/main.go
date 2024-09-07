@@ -1,6 +1,9 @@
 package main
 
 import (
+	"da_server/business"
+	"da_server/storage"
+	"da_server/utils"
 	"database/sql"
 	"encoding/json"
 	"fmt"
@@ -8,9 +11,6 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/akhilsharma/todo/business"
-	"github.com/akhilsharma/todo/storage"
-	"github.com/akhilsharma/todo/utils"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/gorilla/mux"
 	"github.com/jmoiron/sqlx"
