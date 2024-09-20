@@ -22,12 +22,12 @@ form {
     /* display: flex; */
     flex-direction: column;
     /* align-items: center; */
-    background-color: var(--color-theme-table-row-odd) !important;
+    /* background-color: var(--color-theme-table-row-odd) !important; */
     /* width: 700px */
     border-radius: 10px;
     justify-content: center;
     align-items: center;
-    width: 42%;
+    /* width: 42%; */
     display: flex;
     /* margin-left: 250px; */
   }
@@ -55,7 +55,7 @@ form {
     border: 1px solid #ccc;
     border-radius: 4px;
     padding: 8px;
-   
+    color: var(--color-classic-price-table-header) !important;
     font-size: 1rem;
   }
   
