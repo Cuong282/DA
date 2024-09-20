@@ -1,34 +1,24 @@
 package main
 
 import (
-	"fmt"
-
-	"golang.org/x/crypto/bcrypt"
+	"log"
+	"os"
 )
 
 func main() {
-	password := "111111"
-	hash := SignUp(password)
-	err := SignIn("222222", hash)
-	fmt.Println("err ", err)
+	file, err := openLogFile("./mylog.log")
+	if err != nil {
+		log.Fatal(err)
+	}
+	log.SetOutput(file)
+	log.SetFlags(log.LstdFlags | log.Lshortfile | log.Lmicroseconds)
+	log.Println("log file created")
 }
 
-func SignUp(password string) string {
-	hash, err := bcrypt.GenerateFromPassword([]byte(password), 10)
+func openLogFile(path string) (*os.File, error) {
+	logFile, err := os.OpenFile(path, os.O_WRONLY|os.O_APPEND|os.O_CREATE, 0644)
 	if err != nil {
-		fmt.Printf("- signUp error: %v\n", err)
-	} else {
-		fmt.Printf("- signUp with password: %s , hash: %s\n", password, hash)
-
+		return nil, err
 	}
-	return string(hash)
-}
-func SignIn(password, hash string) error {
-	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
-	if err != nil {
-		fmt.Printf("- SignIn error: %v\n", err)
-	} else {
-		fmt.Printf("- SignIn with password: %s , hash: %s\n", password, hash)
-	}
-	return err
+	return logFile, nil
 }

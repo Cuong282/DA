@@ -22,7 +22,7 @@ var (
 )
 
 func init() {
-	db, errDb = sqlx.Open("mysql", "root:123456@tcp(127.0.0.1:3306)/database")
+	db, errDb = sqlx.Open("mysql", "root:123456@tcp(127.0.0.1:3306)/datalogin")
 	if errDb != nil {
 		log.Fatal("Failed to connect to database: ", errDb)
 	}
@@ -76,7 +76,7 @@ func Signup(w http.ResponseWriter, r *http.Request) {
 
 	// Check if the password is strong enough
 	if len(user.Password) <= 6 {
-		fmt.Println("len:", len(user.Password))
+		fmt.Println("password not to long:", len(user.Password))
 		http.Error(w, "OK", http.StatusBadRequest)
 		return
 	}
@@ -95,7 +95,7 @@ func Signup(w http.ResponseWriter, r *http.Request) {
 	password := user.Password
 	fmt.Println("password:", password)
 
-	_, err = db.Exec("INSERT INTO userr (email, password) VALUES (?,?)", user.Email, user.Password)
+	_, err = db.Exec("INSERT INTO login (email, password) VALUES (?,?)", user.Email, user.Password)
 	if err != nil {
 		fmt.Println("err insert :", err)
 		http.Error(w, err.Error(), http.StatusBadRequest)
@@ -117,7 +117,7 @@ func Signin(w http.ResponseWriter, r *http.Request) {
 
 	var userEmail string
 	var user User
-	err = db.QueryRowxContext(context.Background(), "SELECT id, email, password FROM userr WHERE Email = ?", creds.Email).StructScan(&user)
+	err = db.QueryRowxContext(context.Background(), "SELECT id, email, password FROM login WHERE Email = ?", creds.Email).StructScan(&user)
 	if err != nil {
 		fmt.Println("errdb11:", err)
 		if err == sql.ErrNoRows {
@@ -170,7 +170,7 @@ func Signin(w http.ResponseWriter, r *http.Request) {
 func Welcome(w http.ResponseWriter, r *http.Request) {
 	// Lấy cookie tên "token" từ yêu cầu
 	c, err := r.Cookie("token")
-	fmt.Println("tokéntring:", c)
+	fmt.Println("tokentring:", c)
 	fmt.Printf("c: %v, err: %v\n", c, err)
 	if err != nil {
 		if err == http.ErrNoCookie {
