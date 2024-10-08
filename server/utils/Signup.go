@@ -2,7 +2,6 @@ package utils
 
 import (
 	"context"
-	"da_server/logger"
 	"database/sql"
 	"encoding/json"
 	"fmt"
@@ -22,7 +21,7 @@ var (
 )
 
 func init() {
-	db, errDb = sqlx.Open("mysql", "root:123456@tcp(127.0.0.1:3306)/datalogin")
+	db, errDb = sqlx.Open("mysql", "root:123456@tcp(127.0.0.1:3306)/database")
 	if errDb != nil {
 		log.Fatal("Failed to connect to database: ", errDb)
 	}
@@ -95,7 +94,7 @@ func Signup(w http.ResponseWriter, r *http.Request) {
 	password := user.Password
 	fmt.Println("password:", password)
 
-	_, err = db.Exec("INSERT INTO login (email, password) VALUES (?,?)", user.Email, user.Password)
+	_, err = db.Exec("INSERT INTO signup_login (email, password) VALUES (?,?)", user.Email, user.Password)
 	if err != nil {
 		fmt.Println("err insert :", err)
 		http.Error(w, err.Error(), http.StatusBadRequest)
@@ -106,20 +105,16 @@ func Signup(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "User created successfully!")
 }
 func Signin(w http.ResponseWriter, r *http.Request) {
-
 	var creds Credentials
 	err := json.NewDecoder(r.Body).Decode(&creds)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	fmt.Printf("api signIn decode creds: %s\n", logger.JSONDebugDataString(creds))
 
-	var userEmail string
 	var user User
-	err = db.QueryRowxContext(context.Background(), "SELECT id, email, password FROM login WHERE Email = ?", creds.Email).StructScan(&user)
+	err = db.QueryRowxContext(context.Background(), "SELECT id, email, password FROM signup_login WHERE email = ?", creds.Email).StructScan(&user)
 	if err != nil {
-		fmt.Println("errdb11:", err)
 		if err == sql.ErrNoRows {
 			http.Error(w, "Invalid email or password", http.StatusUnauthorized)
 			return
@@ -127,8 +122,13 @@ func Signin(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	fmt.Printf("api signIn userEmail: %s\n", userEmail)
-	fmt.Println("user get from db:", user)
+
+	// So sánh mật khẩu đã mã hóa với mật khẩu người dùng nhập
+	err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(creds.Password))
+	if err != nil {
+		http.Error(w, "Invalid email or password", http.StatusUnauthorized)
+		return
+	}
 
 	expirationTime := time.Now().Add(1 * time.Minute)
 	claims := &Claims{
@@ -137,13 +137,13 @@ func Signin(w http.ResponseWriter, r *http.Request) {
 			ExpiresAt: jwt.NewNumericDate(expirationTime),
 		},
 	}
+
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	tokenString, err := token.SignedString(jwtKey)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	// fmt.Printf("api signIn succes token: %s\n", tokenString)
 
 	w.Header().Set("Content-Type", "application/json")
 	http.SetCookie(w, &http.Cookie{
@@ -152,19 +152,18 @@ func Signin(w http.ResponseWriter, r *http.Request) {
 		Expires:  expirationTime,
 		HttpOnly: true,
 	})
-	// fmt.Fprint(w, "Signed in successfully!")
-	w.WriteHeader(http.StatusOK)
-	w.Header().Set("Content-Type", "application/json")
-	resp := make(map[string]string)
-	resp["message"] = "Status Created"
+
+	// Trả về thông tin và token
+	resp := map[string]string{
+		"message": "Status Created",
+		"email":   user.Email,
+		"token":   tokenString, // Thêm token vào response
+	}
 	jsonResp, err := json.Marshal(resp)
 	if err != nil {
 		log.Fatalf("Error happened in JSON marshal. Err: %s", err)
 	}
 	w.Write(jsonResp)
-	w.WriteHeader(http.StatusOK)
-	// w.Write([]byte("Hello, World!"))
-	json.NewEncoder(w).Encode(creds)
 }
 
 func Welcome(w http.ResponseWriter, r *http.Request) {
