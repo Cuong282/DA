@@ -1,25 +1,21 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import {
   Button,
   Drawer,
-  Dropdown,
   Input,
-  MenuProps,
   Select,
   Space,
   Tooltip,
 } from "antd";
 import "./setcommant.css";
-import {
-  DownOutlined,
-  InfoCircleOutlined,
-  MinusOutlined,
-  PlusOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
+import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
+import { GetApi } from "../../services";
 
 const SetBuy: React.FC = () => {
   const [open, setOpen] = useState(false);
+  const [quantity, setQuantity] = useState<number | null>(null); // Khối lượng
+  const [price, setPrice] = useState<number | null>(null);       // Giá
+  const [account, setAccount] = useState<string | null>(null);   // Tài khoản đặt lệnh
 
   const showDrawer = () => {
     setOpen(true);
@@ -29,22 +25,64 @@ const SetBuy: React.FC = () => {
     setOpen(false);
   };
 
+  // Xử lý thay đổi khối lượng
+  const handleQuantityChange = (value: string) => {
+    setQuantity(Number(value));
+  };
 
-  const items: MenuProps["items"] = [
-    {
-      label: <a >USER1</a>,
-      key: "0",
-    },
-    {
-      label: <a >USER2</a>,
-      key: "1",
-    },
-    {
-      label: "USER3",
-      key: "3",
-    },
-  ];
+  // Xử lý thay đổi giá
+  const handlePriceChange = (value: string) => {
+    setPrice(Number(value));
+  };
 
+  // Xử lý thay đổi tài khoản
+  const handleAccountChange = (value: string) => {
+    setAccount(value);
+  };
+
+  // Hàm xử lý khi nhấn nút Mua
+  const handleBuy = () => {
+    if (!quantity || !price || !account) {
+      alert("Vui lòng nhập đầy đủ thông tin!");
+      return;
+    }
+
+    // Gọi API hoặc xử lý logic mua ở đây
+    console.log("Mua cổ phiếu với khối lượng:", quantity, "giá:", price, "tài khoản:", account);
+    alert(`Mua thành công ${quantity} cổ phiếu với giá ${price} từ tài khoản ${account}`);
+  };
+
+  // Hàm xử lý khi nhấn nút Bán
+  const handleSell = () => {
+    if (!quantity || !price || !account) {
+      alert("Vui lòng nhập đầy đủ thông tin!");
+      return;
+    }
+
+    // Gọi API hoặc xử lý logic bán ở đây
+    console.log("Bán cổ phiếu với khối lượng:", quantity, "giá:", price, "tài khoản:", account);
+    alert(`Bán thành công ${quantity} cổ phiếu với giá ${price} từ tài khoản ${account}`);
+  };
+  const [rowData, setRowData] = useState<any[]>();
+
+function getUserData (){
+    GetApi()
+    .then((result) => {
+      const data = convertDataUser(result.data.slice(0, 30));
+      // setRowData(data);
+    })
+    .catch((error) => {
+      console.error("Error fetching data:", error);
+    });
+}
+function convertDataUser (data:any){
+  return(
+    data.length > 0  
+  )
+}
+const onGridReady = useCallback((params: any) => {
+  getNewdata();
+}, []);
   return (
     <>
       <Button
@@ -74,7 +112,7 @@ const SetBuy: React.FC = () => {
             <h3 className="text-theme-text-up"> SSI </h3>
             <p className="text-sm pl-2"> (HOSE)</p>
           </div>
-          <div className="">
+          <div>
             <div className="text-color-down flex text-center justify-center">
               <h1>29.6</h1>
             </div>
@@ -91,43 +129,30 @@ const SetBuy: React.FC = () => {
             <div>Tổng KL</div>
           </div>
         </div>
+
         {/* content */}
         <div className="title-content mt-8">
           <div className="flex items-center justify-between space-x-2">
-            <p>tài khoản đặt lệnh</p>
-
-
+            <p>Tài khoản đặt lệnh</p>
             <Select
               showSearch
-              placeholder="Select a person"
-              filterOption={(input, option) =>
-                (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
-              }
+              placeholder="Chọn tài khoản"
+              onChange={handleAccountChange} // Xử lý khi chọn tài khoản
               options={[
-                { value: '1', label: 'Jack' },
-                { value: '2', label: 'Lucy' },
-                { value: '3', label: 'Tom' },
+                { value: 'Jack', label: 'Jack' },
+                { value: 'Lucy', label: 'Lucy' },
+                { value: 'Tom', label: 'Tom' },
               ]}
             />
-          </div>
-          <div className="flex items-center justify-around mt-8">
-            <p>KL mua </p>
-            <p> 0VND</p>
           </div>
 
           <div className="flex items-center justify-around mt-8">
             <p>Khối Lượng</p>
             <div className=" input-group">
-
-              <div className="cursor-pointer text-theme-text-down hover:bg-tertiary hover:text-color-highlight icon left-icon"></div>
               <Input
-                placeholder="Enter your username"
-                prefix={<MinusOutlined style={{ color: "green" }} />}
-                suffix={
-                  <Tooltip title="Extra information">
-                    <PlusOutlined style={{ color: "green" }} />
-                  </Tooltip>
-                }
+                placeholder="Nhập khối lượng"
+                value={quantity ?? ''}
+                onChange={(e) => handleQuantityChange(e.target.value)} // Xử lý thay đổi khối lượng
               />
             </div>
           </div>
@@ -135,23 +160,17 @@ const SetBuy: React.FC = () => {
           <div className="flex items-center justify-around mt-8">
             <p>Giá (x1000)</p>
             <div className=" input-group">
-
-              <div className="cursor-pointer text-theme-text-down hover:bg-tertiary hover:text-color-highlight icon left-icon"></div>
               <Input
-                placeholder="Enter your username"
-                prefix={<MinusOutlined style={{ color: "green" }} />}
-                suffix={
-                  <Tooltip title="Extra information">
-                    <PlusOutlined style={{ color: "green" }} />
-                  </Tooltip>
-                }
+                placeholder="Nhập giá"
+                value={price ?? ''}
+                onChange={(e) => handlePriceChange(e.target.value)} // Xử lý thay đổi giá
               />
             </div>
           </div>
 
           <div className="flex items-center justify-around mt-10">
-            <Button className="border-current bg-green-600" type="primary">Mua</Button>
-            <Button className="border-current bg-red-600" type="primary">Bán</Button>
+            <Button className="border-current bg-green-600" type="primary" onClick={handleBuy}>Mua</Button>
+            <Button className="border-current bg-red-600" type="primary" onClick={handleSell}>Bán</Button>
           </div>
         </div>
       </Drawer>
@@ -160,3 +179,7 @@ const SetBuy: React.FC = () => {
 };
 
 export default SetBuy;
+function getNewdata() {
+  throw new Error("Function not implemented.");
+}
+
