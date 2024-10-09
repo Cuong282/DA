@@ -46,10 +46,11 @@ function SignupForm() {
       <div className="Sigup_change">
       <form className="flex items-center " >
         <h2>Sign up</h2>
+        <h1>cuong</h1>
         <div className="Signup">
           <br />
           <label >
-            Email:
+            Email:cuong
             <input
               type="email"
               placeholder="email"
